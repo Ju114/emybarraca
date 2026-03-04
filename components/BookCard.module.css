@@ -1,0 +1,90 @@
+.card {
+  display: grid;
+  gap: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-surface);
+  padding: 1rem;
+}
+
+.coverLink {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.cover {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  object-fit: cover;
+}
+
+.body {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.badge {
+  justify-self: start;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-accent) 27%, white);
+  padding: 0.26rem 0.66rem;
+  color: var(--color-primary);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.title {
+  margin: 0;
+  color: var(--color-primary);
+  font-size: 1.45rem;
+}
+
+.title a {
+  text-decoration: none;
+}
+
+.synopsis {
+  margin: 0;
+  line-height: 1.75;
+}
+
+.meta {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.meta div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.meta dt {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.meta dd {
+  margin: 0;
+}
+
+.actions {
+  margin-top: 0.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  align-items: center;
+}
+
+.soon {
+  color: var(--color-text-muted);
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+}

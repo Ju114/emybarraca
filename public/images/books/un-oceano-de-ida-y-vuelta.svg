@@ -1,0 +1,9 @@
+<svg width="800" height="1200" viewBox="0 0 800 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="1200" fill="#2F4E59"/>
+  <rect x="58" y="58" width="684" height="1084" rx="18" stroke="#C9A96E" stroke-width="3"/>
+  <path d="M0 720C120 650 220 790 330 740C450 685 560 790 800 700V1200H0V720Z" fill="#7EA2B1"/>
+  <path d="M0 780C120 710 220 860 330 810C450 755 560 870 800 780V1200H0V780Z" fill="#ABC8D4"/>
+  <text x="88" y="210" fill="#FFF8F0" font-family="Georgia, serif" font-size="56">Un oceano de</text>
+  <text x="88" y="280" fill="#FFF8F0" font-family="Georgia, serif" font-size="56">ida y vuelta</text>
+  <text x="90" y="345" fill="#C9A96E" font-family="Arial, sans-serif" font-size="28" letter-spacing="5">EMY BARRACA</text>
+</svg>

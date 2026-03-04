@@ -1,0 +1,9 @@
+<svg width="800" height="1200" viewBox="0 0 800 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="1200" fill="#722F37"/>
+  <rect x="58" y="58" width="684" height="1084" rx="18" stroke="#C9A96E" stroke-width="3"/>
+  <circle cx="400" cy="360" r="170" fill="#8E4A53"/>
+  <path d="M300 420C340 340 460 340 500 420" stroke="#FFF8F0" stroke-width="7" stroke-linecap="round"/>
+  <path d="M280 455C350 520 450 520 520 455" stroke="#FFF8F0" stroke-width="7" stroke-linecap="round"/>
+  <text x="90" y="790" fill="#FFF8F0" font-family="Georgia, serif" font-size="58">Cultivar dos jardines</text>
+  <text x="90" y="860" fill="#C9A96E" font-family="Arial, sans-serif" font-size="28" letter-spacing="5">EMY BARRACA</text>
+</svg>

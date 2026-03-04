@@ -1,0 +1,8 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#722F37"/>
+  <circle cx="1020" cy="120" r="250" fill="#C9A96E" fill-opacity="0.3"/>
+  <rect x="70" y="70" width="1060" height="490" rx="22" stroke="#FFF8F0" stroke-width="2"/>
+  <text x="120" y="260" fill="#FFF8F0" font-family="Georgia, serif" font-size="74">Emy Barraca</text>
+  <text x="120" y="340" fill="#FFF8F0" font-family="Georgia, serif" font-size="46">Escritora espanola</text>
+  <text x="120" y="430" fill="#C9A96E" font-family="Arial, sans-serif" font-size="30">Novelas · Relatos · Contacto profesional</text>
+</svg>

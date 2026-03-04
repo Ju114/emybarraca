@@ -1,0 +1,8 @@
+<svg width="900" height="1100" viewBox="0 0 900 1100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="1100" fill="#F4ECE2"/>
+  <rect x="70" y="70" width="760" height="960" rx="22" fill="#FFF8F0" stroke="#C9A96E" stroke-width="3"/>
+  <circle cx="450" cy="430" r="165" fill="#D6B88A"/>
+  <rect x="270" y="610" width="360" height="230" rx="115" fill="#D6B88A"/>
+  <text x="205" y="920" fill="#722F37" font-family="Georgia, serif" font-size="50">Foto de autora</text>
+  <text x="228" y="970" fill="#5F5B56" font-family="Arial, sans-serif" font-size="28">Sustituir por imagen oficial</text>
+</svg>

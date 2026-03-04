@@ -1,0 +1,83 @@
+.form {
+  display: grid;
+  gap: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-surface);
+  padding: clamp(1rem, 3vw, 1.4rem);
+}
+
+.grid {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.field span {
+  font-family: var(--font-ui);
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.7rem 0.8rem;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 40%, white);
+  outline: none;
+}
+
+.field input[aria-invalid="true"],
+.field textarea[aria-invalid="true"] {
+  border-color: #ba1a1a;
+}
+
+.error {
+  color: #ba1a1a;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+}
+
+.result {
+  border-radius: 10px;
+  background: color-mix(in srgb, #0f8a2f 12%, white);
+  padding: 0.7rem 0.8rem;
+  color: #0a6222;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+}
+
+.resultError {
+  background: color-mix(in srgb, #ba1a1a 12%, white);
+  color: #7a1111;
+}
+
+@media (max-width: 700px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

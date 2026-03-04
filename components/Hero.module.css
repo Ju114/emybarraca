@@ -1,0 +1,59 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 22px;
+  background:
+    linear-gradient(150deg, color-mix(in srgb, var(--color-primary) 12%, white), transparent 40%),
+    radial-gradient(circle at 80% 20%, color-mix(in srgb, var(--color-accent) 30%, white), transparent 45%),
+    var(--color-surface);
+  padding: clamp(2rem, 6vw, 4rem);
+}
+
+.hero::after {
+  position: absolute;
+  right: -100px;
+  bottom: -100px;
+  height: 260px;
+  width: 260px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-primary) 20%, transparent);
+  content: "";
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
+  max-width: 68ch;
+}
+
+.pretitle {
+  margin-bottom: 0.75rem;
+  color: var(--color-primary);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  color: var(--color-primary);
+  font-size: clamp(2rem, 4.3vw, 3.2rem);
+  line-height: 1.15;
+}
+
+.lead {
+  margin-top: 1.1rem;
+  max-width: 60ch;
+  font-size: clamp(1rem, 1.4vw, 1.12rem);
+  line-height: 1.8;
+}
+
+.actions {
+  margin-top: 1.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
