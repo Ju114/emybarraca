@@ -29,7 +29,7 @@ const uiFont = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${siteConfig.name} | Escritora espanola`,
+    default: `${siteConfig.name} | Escritora española`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.seo.defaultDescription,

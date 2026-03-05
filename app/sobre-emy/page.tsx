@@ -7,7 +7,7 @@ import styles from "./page.module.css";
 export const metadata: Metadata = buildMetadata({
   title: "Sobre Emy",
   description:
-    "Biografia de Emy Barraca, escritora espanola de narrativa romantica y realista.",
+    "Biografía de Emy Barraca, escritora española de narrativa romántica y realista.",
   pathname: "/sobre-emy",
 });
 
@@ -23,8 +23,8 @@ export default function AboutPage() {
     sameAs: [
       siteConfig.social.youtube,
       siteConfig.social.facebook,
-      siteConfig.social.instagram,
-      siteConfig.social.tiktok,
+      siteConfig.instagramUrl,
+      siteConfig.tiktokUrl,
     ],
     nationality: "ES",
   };
@@ -34,13 +34,13 @@ export default function AboutPage() {
       <header>
         <h1 className="pageTitle">Sobre Emy</h1>
         <p className="pageLead">
-          Un espacio para conocer la voz literaria, trayectoria y vision de la autora.
+          Un espacio para conocer la voz literaria, trayectoria y visión de la autora.
         </p>
       </header>
 
       <section className={styles.grid}>
         <article className="card">
-          <h2 className="sectionTitle">Biografia</h2>
+          <h2 className="sectionTitle">Biografía</h2>
           {siteConfig.longBio.split("\n\n").map((paragraph, index) => (
             <p key={index} className={styles.paragraph}>
               {paragraph}
@@ -59,7 +59,7 @@ export default function AboutPage() {
               className={styles.authorImage}
               sizes="(max-width: 1024px) 80vw, 360px"
             />
-            <p className={styles.note}>EDITABLE: Sustituir por fotografia oficial.</p>
+            <p className={styles.note}>EDITABLE: Sustituir por fotografía oficial.</p>
           </article>
 
           <article className="card">

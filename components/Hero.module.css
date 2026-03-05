@@ -7,7 +7,7 @@
     linear-gradient(150deg, color-mix(in srgb, var(--color-primary) 12%, white), transparent 40%),
     radial-gradient(circle at 80% 20%, color-mix(in srgb, var(--color-accent) 30%, white), transparent 45%),
     var(--color-surface);
-  padding: clamp(2rem, 6vw, 4rem);
+  padding: clamp(1.25rem, 5vw, 4rem);
 }
 
 .hero::after {
@@ -56,4 +56,23 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
+}
+
+@media (max-width: 767px) {
+  .title {
+    font-size: clamp(1.7rem, 8.5vw, 2.35rem);
+  }
+
+  .lead {
+    line-height: 1.65;
+  }
+
+  .actions {
+    width: 100%;
+    gap: 0.6rem;
+  }
+
+  .actions a {
+    flex: 1 1 100%;
+  }
 }

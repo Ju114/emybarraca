@@ -62,27 +62,31 @@ export const siteConfig = {
   name: "Emy Barraca",
   role: "Escritora y novelista",
   language: "es-ES",
-  tagline: "Historias que vuelven al origen, con la emocion en primer plano.",
+  tagline: "Historias que vuelven al origen, con la emoción en primer plano.",
   shortIntro:
-    "Emy Barraca escribe novelas donde lo intimo y lo cotidiano se entrelazan con una mirada serena. Sus personajes atraviesan distancias geografica y emocional para regresar a lo esencial: la verdad de los afectos.",
+    "Emy Barraca escribe novelas donde lo íntimo y lo cotidiano se entrelazan con una mirada serena. Sus personajes atraviesan distancia geográfica y emocional para regresar a lo esencial: la verdad de los afectos.",
   contactIntro:
     "Si eres lector, editorial o profesional cultural, este es el mejor punto de encuentro para propuestas, entrevistas y colaboraciones.",
   shortBioFooter:
-    "Emy Barraca es autora de narrativa romantica y realista. Sus historias exploran la memoria emocional, los vinculos familiares y los lugares que nos transforman.",
+    "Emy Barraca es autora de narrativa romántica y realista. Sus historias exploran la memoria emocional, los vínculos familiares y los lugares que nos transforman.",
   longBio:
-    "EDITABLE: Emy Barraca (Espana) desarrolla una obra centrada en el drama sentimental y la narrativa realista. Su escritura se caracteriza por una voz clara, sensible y atenta a los matices del vinculo humano. A lo largo de su trayectoria, ha trabajado en relatos y novelas que conectan escenarios internacionales con raices emocionales profundas.\n\nEDITABLE: Actualmente combina la publicacion de novelas con proyectos de relato breve y colaboraciones literarias. Esta seccion debe actualizarse con datos verificados sobre formacion, hitos editoriales, medios y presentaciones.",
+    "EDITABLE: Emy Barraca (España) desarrolla una obra centrada en el drama sentimental y la narrativa realista. Su escritura se caracteriza por una voz clara, sensible y atenta a los matices del vínculo humano. A lo largo de su trayectoria, ha trabajado en relatos y novelas que conectan escenarios internacionales con raíces emocionales profundas.\n\nEDITABLE: Actualmente combina la publicación de novelas con proyectos de relato breve y colaboraciones literarias. Esta sección debe actualizarse con datos verificados sobre formación, hitos editoriales, medios y presentaciones.",
   contactEmail: "contacto@emybarraca.com", // EDITABLE
-  // EDITABLE: Actualiza aqui todas las URLs de redes y WhatsApp.
+  // EDITABLE: URLs centrales para canales de contacto.
+  instagramUrl: "https://instagram.com/emybarraca", // EDITABLE (placeholder)
+  tiktokUrl: "https://tiktok.com/@emybarraca", // EDITABLE (placeholder)
+  whatsappUrl: "https://wa.me/34000000000", // EDITABLE (placeholder)
   social: {
     youtube: "https://www.youtube.com/@emybarraca", // EDITABLE
     facebook: "https://www.facebook.com/emybarraca", // EDITABLE
-    instagram: "https://instagram.com/emybarraca", // EDITABLE (placeholder)
-    tiktok: "https://tiktok.com/@emybarraca", // EDITABLE (placeholder)
-    whatsapp: "https://wa.me/34000000000", // EDITABLE (placeholder)
+  },
+  primaryCta: {
+    label: "Contactar",
+    href: "/contacto",
   },
   seo: {
     defaultDescription:
-      "Web oficial de la escritora espanola Emy Barraca. Novelas, relatos, biografia y contacto profesional.",
+      "Web oficial de la escritora española Emy Barraca. Novelas, relatos, biografía y contacto profesional.",
     ogImage: "/images/og-default.svg", // EDITABLE
   },
 };
@@ -342,14 +346,14 @@ export const quickLinks = [
 export const socialLinks: SocialLinkItem[] = [
   { platform: "youtube", label: "YouTube", href: siteConfig.social.youtube },
   { platform: "facebook", label: "Facebook", href: siteConfig.social.facebook },
-  { platform: "instagram", label: "Instagram", href: siteConfig.social.instagram },
-  { platform: "tiktok", label: "TikTok", href: siteConfig.social.tiktok },
+  { platform: "instagram", label: "Instagram", href: siteConfig.instagramUrl },
+  { platform: "tiktok", label: "TikTok", href: siteConfig.tiktokUrl },
 ];
 
 export const legalLinks = [
   { label: "Aviso Legal", href: "/aviso-legal" },
-  { label: "Politica de Privacidad", href: "/politica-de-privacidad" },
-  { label: "Politica de Cookies", href: "/politica-de-cookies" },
+  { label: "Política de Privacidad", href: "/politica-de-privacidad" },
+  { label: "Política de Cookies", href: "/politica-de-cookies" },
 ];
 
 export function getBookBySlug(slug: string) {

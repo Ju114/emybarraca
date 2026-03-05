@@ -21,11 +21,11 @@ function validate(data: FormData) {
   const errors: Partial<Record<keyof FormData, string>> = {};
 
   if (data.name.trim().length < 2) {
-    errors.name = "Introduce un nombre valido.";
+    errors.name = "Introduce un nombre válido.";
   }
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-    errors.email = "Introduce un email valido.";
+    errors.email = "Introduce un email válido.";
   }
 
   if (data.subject.trim().length < 4) {
@@ -75,7 +75,7 @@ export function ContactForm() {
       }
 
       setResultMessage(
-        "Mensaje enviado (simulado). Recibido correctamente para su revision.",
+        "Mensaje enviado (simulado). Recibido correctamente para su revisión.",
       );
       setFormData(initialData);
       setErrors({});

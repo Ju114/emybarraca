@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Book } from "@/data/site";
@@ -13,6 +13,8 @@ type CarouselProps = {
 export function Carousel({ books }: CarouselProps) {
   const items = useMemo(() => books, [books]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const touchStartX = useRef<number | null>(null);
+  const touchDeltaX = useRef(0);
 
   const goTo = useCallback(
     (index: number) => {
@@ -29,6 +31,31 @@ export function Carousel({ books }: CarouselProps) {
     },
     [items.length],
   );
+
+  const onTouchStart: React.TouchEventHandler<HTMLElement> = (event) => {
+    touchStartX.current = event.touches[0]?.clientX ?? null;
+    touchDeltaX.current = 0;
+  };
+
+  const onTouchMove: React.TouchEventHandler<HTMLElement> = (event) => {
+    if (touchStartX.current === null) {
+      return;
+    }
+    const nextX = event.touches[0]?.clientX ?? touchStartX.current;
+    touchDeltaX.current = nextX - touchStartX.current;
+  };
+
+  const onTouchEnd = () => {
+    const swipeThreshold = 50;
+    if (touchDeltaX.current <= -swipeThreshold) {
+      goTo(currentIndex + 1);
+    } else if (touchDeltaX.current >= swipeThreshold) {
+      goTo(currentIndex - 1);
+    }
+
+    touchStartX.current = null;
+    touchDeltaX.current = 0;
+  };
 
   const onKeyDown: React.KeyboardEventHandler<HTMLElement> = (event) => {
     if (event.key === "ArrowLeft") {
@@ -52,26 +79,28 @@ export function Carousel({ books }: CarouselProps) {
       onKeyDown={onKeyDown}
       tabIndex={0}
     >
-      <div className={styles.controls}>
+      <div
+        className={styles.viewport}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
         <button
-          aria-label="Mostrar obra anterior"
-          className={styles.arrow}
+          aria-label="Anterior"
+          className={`${styles.arrow} ${styles.arrowPrev}`}
           onClick={() => goTo(currentIndex - 1)}
           type="button"
         >
           ‹
         </button>
         <button
-          aria-label="Mostrar obra siguiente"
-          className={styles.arrow}
+          aria-label="Siguiente"
+          className={`${styles.arrow} ${styles.arrowNext}`}
           onClick={() => goTo(currentIndex + 1)}
           type="button"
         >
           ›
         </button>
-      </div>
-
-      <div className={styles.viewport}>
         <ul
           className={styles.track}
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -89,6 +118,7 @@ export function Carousel({ books }: CarouselProps) {
                       height={560}
                       sizes="(max-width: 800px) 80vw, 360px"
                       className={styles.image}
+                      loading="lazy"
                     />
                   </div>
 
@@ -123,7 +153,7 @@ export function Carousel({ books }: CarouselProps) {
         </ul>
       </div>
 
-      <div className={styles.indicators} role="tablist" aria-label="Seleccion de obra">
+      <div className={styles.indicators} role="tablist" aria-label="Selección de obra">
         {items.map((book, index) => (
           <button
             key={book.slug}

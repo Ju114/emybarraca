@@ -20,7 +20,7 @@ export async function POST(request: Request) {
   if (name.length < 2 || !isValidEmail(email) || subject.length < 4 || message.length < 20) {
     return NextResponse.json(
       {
-        message: "Datos incompletos o invalidos.",
+        message: "Datos incompletos o inválidos.",
       },
       { status: 400 },
     );

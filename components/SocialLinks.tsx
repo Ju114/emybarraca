@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { SocialPlatform } from "@/data/site";
 import { socialLinks } from "@/data/site";
 import { SocialIcon } from "./SocialIcon";
 import styles from "./SocialLinks.module.css";
@@ -6,10 +7,18 @@ import styles from "./SocialLinks.module.css";
 type SocialLinksProps = {
   compact?: boolean;
   iconOnly?: boolean;
+  platforms?: SocialPlatform[];
 };
 
-export function SocialLinks({ compact = false, iconOnly = false }: SocialLinksProps) {
+export function SocialLinks({
+  compact = false,
+  iconOnly = false,
+  platforms,
+}: SocialLinksProps) {
   const classNames = [styles.list];
+  const items = platforms
+    ? socialLinks.filter((link) => platforms.includes(link.platform))
+    : socialLinks;
 
   if (compact) {
     classNames.push(styles.compact);
@@ -21,7 +30,7 @@ export function SocialLinks({ compact = false, iconOnly = false }: SocialLinksPr
 
   return (
     <ul className={classNames.join(" ")}>
-      {socialLinks.map((link) => (
+      {items.map((link) => (
         <li key={link.platform}>
           <Link
             className={styles.link}

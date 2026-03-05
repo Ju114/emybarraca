@@ -12,6 +12,8 @@
   --font-heading: "Playfair Display", Georgia, serif;
   --font-body: "Lora", "Times New Roman", serif;
   --font-ui: "Inter", "Segoe UI", sans-serif;
+  --layout-max-width: 1120px;
+  --layout-padding: 16px;
 }
 
 * {
@@ -24,8 +26,13 @@ body {
   padding: 0;
 }
 
+html {
+  overflow-x: clip;
+}
+
 body {
   min-height: 100vh;
+  overflow-x: clip;
   color: var(--color-text);
   background:
     radial-gradient(circle at top left, color-mix(in srgb, var(--color-accent) 20%, transparent), transparent 30%),
@@ -83,13 +90,13 @@ p {
 
 .siteMain {
   margin: 0 auto;
-  width: min(1120px, 92vw);
-  padding-top: 1.8rem;
+  width: min(var(--layout-max-width), calc(100% - (var(--layout-padding) * 2)));
+  padding-top: clamp(1.2rem, 3vw, 1.8rem);
 }
 
 .pageShell {
   display: grid;
-  gap: clamp(2rem, 4vw, 3rem);
+  gap: clamp(1.65rem, 3.4vw, 2.7rem);
 }
 
 .pageTitle {
@@ -121,9 +128,10 @@ p {
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
+  min-height: 44px;
   border: 1px solid transparent;
   border-radius: 999px;
-  padding: 0.64rem 1.05rem;
+  padding: 0.72rem 1.1rem;
   font-family: var(--font-ui);
   font-size: 0.92rem;
   font-weight: 600;
@@ -158,4 +166,16 @@ p {
 .btnGhost:hover {
   border-color: var(--color-accent);
   background: color-mix(in srgb, var(--color-accent) 16%, white);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --layout-padding: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --layout-padding: 32px;
+  }
 }

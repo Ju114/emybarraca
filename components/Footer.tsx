@@ -8,12 +8,12 @@ export function Footer() {
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.bioBlock}>
-          <p className={styles.kicker}>Emy Barraca</p>
+          <p className={styles.kicker}>{siteConfig.name}</p>
           <p className={styles.bio}>{siteConfig.shortBioFooter}</p>
         </div>
 
         <div>
-          <p className={styles.blockTitle}>Enlaces rapidos</p>
+          <p className={styles.blockTitle}>Navegación</p>
           <ul className={styles.links}>
             {quickLinks.map((item) => (
               <li key={item.href}>
@@ -25,7 +25,7 @@ export function Footer() {
 
         <div>
           <p className={styles.blockTitle}>Redes sociales</p>
-          <SocialLinks compact iconOnly />
+          <SocialLinks compact iconOnly platforms={["instagram", "tiktok"]} />
         </div>
 
         <div>
