@@ -89,15 +89,6 @@ export function Header() {
               );
             })}
           </ul>
-          {siteConfig.primaryCta ? (
-            <Link
-              className={`btn btnPrimary ${styles.menuCta}`}
-              href={siteConfig.primaryCta.href}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {siteConfig.primaryCta.label}
-            </Link>
-          ) : null}
         </nav>
       </div>
     </header>

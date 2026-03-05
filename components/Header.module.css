@@ -10,11 +10,13 @@
 .container {
   margin: 0 auto;
   display: flex;
-  width: min(var(--layout-max-width), calc(100% - (var(--layout-padding) * 2)));
+  width: 100%;
+  max-width: var(--layout-max-width);
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
-  padding: 0.95rem 0;
+  padding-inline: var(--layout-padding);
+  padding-block: 0.95rem;
 }
 
 .brand {
@@ -84,16 +86,12 @@
   color: var(--color-cream);
 }
 
-.menuCta {
-  display: none;
-}
-
 @media (max-width: 767px) {
   .container {
     position: relative;
     align-items: flex-start;
     gap: 0.7rem;
-    padding: 0.75rem 0;
+    padding-block: 0.75rem;
   }
 
   .brand {
@@ -179,9 +177,4 @@
     color: var(--color-cream);
   }
 
-  .menuCta {
-    display: inline-flex;
-    margin-top: 0.55rem;
-    min-height: 44px;
-  }
 }

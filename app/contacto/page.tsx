@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ContactForm } from "@/components/ContactForm";
 import { SocialIcon } from "@/components/SocialIcon";
+import { SocialLinks } from "@/components/SocialLinks";
 import { siteConfig } from "@/data/site";
 import { buildMetadata } from "@/lib/seo";
 import styles from "./page.module.css";
@@ -21,6 +22,7 @@ export default function ContactPage() {
       href: `mailto:${siteConfig.contactEmail}`,
       action: "Enviar correo",
       icon: <MailIcon className={styles.channelIcon} />,
+      visibleValue: siteConfig.contactEmail,
     },
     {
       title: "WhatsApp",
@@ -28,20 +30,6 @@ export default function ContactPage() {
       href: siteConfig.whatsappUrl,
       action: "Escribir por WhatsApp",
       icon: <SocialIcon name="whatsapp" className={styles.channelIcon} />,
-    },
-    {
-      title: "Instagram",
-      description: "Novedades literarias y contenido de autora.",
-      href: siteConfig.instagramUrl,
-      action: "Ver Instagram",
-      icon: <SocialIcon name="instagram" className={styles.channelIcon} />,
-    },
-    {
-      title: "TikTok",
-      description: "Piezas breves y fragmentos de obras.",
-      href: siteConfig.tiktokUrl,
-      action: "Ver TikTok",
-      icon: <SocialIcon name="tiktok" className={styles.channelIcon} />,
     },
   ];
 
@@ -70,6 +58,11 @@ export default function ContactPage() {
                   <h3>{channel.title}</h3>
                 </div>
                 <p>{channel.description}</p>
+                {"visibleValue" in channel ? (
+                  <p className={styles.visibleValue}>
+                    <Link href={`mailto:${channel.visibleValue}`}>{channel.visibleValue}</Link>
+                  </p>
+                ) : null}
                 <Link
                   className="btn btnGhost"
                   href={channel.href}
@@ -81,6 +74,17 @@ export default function ContactPage() {
               </article>
             ))}
           </div>
+
+          <section className={styles.socialSection} aria-labelledby="redes-sociales">
+            <h3 id="redes-sociales" className={styles.socialTitle}>
+              Redes sociales
+            </h3>
+            <SocialLinks
+              compact
+              iconOnly
+              platforms={["youtube", "facebook", "instagram", "tiktok"]}
+            />
+          </section>
         </article>
 
         <article>

@@ -25,7 +25,7 @@ export function Footer() {
 
         <div>
           <p className={styles.blockTitle}>Redes sociales</p>
-          <SocialLinks compact iconOnly platforms={["instagram", "tiktok"]} />
+          <SocialLinks compact iconOnly platforms={["youtube", "facebook", "instagram", "tiktok"]} />
         </div>
 
         <div>
