@@ -1,4 +1,5 @@
 .carousel {
+  min-width: 0;
   border: 1px solid var(--color-border);
   border-radius: 20px;
   background: var(--color-surface);
@@ -48,6 +49,7 @@
 
 .viewport {
   position: relative;
+  min-width: 0;
   overflow: hidden;
   border-radius: 16px;
   padding-inline: 2.7rem;
@@ -68,6 +70,7 @@
 
 .card {
   display: grid;
+  min-width: 0;
   align-items: stretch;
   gap: 1rem;
   grid-template-columns: minmax(170px, 260px) 1fr;
@@ -88,6 +91,7 @@
 
 .content {
   display: grid;
+  min-width: 0;
   align-content: center;
   gap: 0.7rem;
   padding: 0.5rem 0.3rem;
@@ -112,6 +116,7 @@
 
 .content p {
   margin: 0;
+  overflow-wrap: anywhere;
   line-height: 1.75;
 }
 
