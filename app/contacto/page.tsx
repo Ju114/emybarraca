@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ContactForm } from "@/components/ContactForm";
 import { SocialIcon } from "@/components/SocialIcon";
-import { SocialLinks } from "@/components/SocialLinks";
 import { siteConfig } from "@/data/site";
 import { buildMetadata } from "@/lib/seo";
 import styles from "./page.module.css";
@@ -74,17 +73,6 @@ export default function ContactPage() {
               </article>
             ))}
           </div>
-
-          <section className={styles.socialSection} aria-labelledby="redes-sociales">
-            <h3 id="redes-sociales" className={styles.socialTitle}>
-              Redes sociales
-            </h3>
-            <SocialLinks
-              compact
-              iconOnly
-              platforms={["youtube", "facebook", "instagram", "tiktok"]}
-            />
-          </section>
         </article>
 
         <article>
