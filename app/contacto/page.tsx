@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ContactForm } from "@/components/ContactForm";
+import { SocialIcon } from "@/components/SocialIcon";
 import { SocialLinks } from "@/components/SocialLinks";
 import { siteConfig } from "@/data/site";
 import { buildMetadata } from "@/lib/seo";
@@ -30,6 +31,17 @@ export default function ContactPage() {
           <p className={styles.copy}>
             Tambien puedes escribir mediante el formulario o visitar redes oficiales.
           </p>
+          <Link
+            className={`btn btnGhost ${styles.whatsappButton}`}
+            href={siteConfig.social.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp"
+            title="WhatsApp"
+          >
+            <SocialIcon name="whatsapp" className={styles.whatsappIcon} />
+            Escribir por WhatsApp
+          </Link>
           <SocialLinks />
         </article>
 

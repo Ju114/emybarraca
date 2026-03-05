@@ -50,6 +50,14 @@ export type AwardItem = {
   isPlaceholder?: boolean;
 };
 
+export type SocialPlatform = "youtube" | "facebook" | "instagram" | "tiktok";
+
+export type SocialLinkItem = {
+  platform: SocialPlatform;
+  label: string;
+  href: string;
+};
+
 export const siteConfig = {
   name: "Emy Barraca",
   role: "Escritora y novelista",
@@ -64,9 +72,13 @@ export const siteConfig = {
   longBio:
     "EDITABLE: Emy Barraca (Espana) desarrolla una obra centrada en el drama sentimental y la narrativa realista. Su escritura se caracteriza por una voz clara, sensible y atenta a los matices del vinculo humano. A lo largo de su trayectoria, ha trabajado en relatos y novelas que conectan escenarios internacionales con raices emocionales profundas.\n\nEDITABLE: Actualmente combina la publicacion de novelas con proyectos de relato breve y colaboraciones literarias. Esta seccion debe actualizarse con datos verificados sobre formacion, hitos editoriales, medios y presentaciones.",
   contactEmail: "contacto@emybarraca.com", // EDITABLE
+  // EDITABLE: Actualiza aqui todas las URLs de redes y WhatsApp.
   social: {
     youtube: "https://www.youtube.com/@emybarraca", // EDITABLE
     facebook: "https://www.facebook.com/emybarraca", // EDITABLE
+    instagram: "https://instagram.com/emybarraca", // EDITABLE (placeholder)
+    tiktok: "https://tiktok.com/@emybarraca", // EDITABLE (placeholder)
+    whatsapp: "https://wa.me/34000000000", // EDITABLE (placeholder)
   },
   seo: {
     defaultDescription:
@@ -325,6 +337,19 @@ export const quickLinks = [
   { label: "Novelas", href: "/novelas" },
   { label: "Relatos", href: "/relatos" },
   { label: "Contacto", href: "/contacto" },
+];
+
+export const socialLinks: SocialLinkItem[] = [
+  { platform: "youtube", label: "YouTube", href: siteConfig.social.youtube },
+  { platform: "facebook", label: "Facebook", href: siteConfig.social.facebook },
+  { platform: "instagram", label: "Instagram", href: siteConfig.social.instagram },
+  { platform: "tiktok", label: "TikTok", href: siteConfig.social.tiktok },
+];
+
+export const legalLinks = [
+  { label: "Aviso Legal", href: "/aviso-legal" },
+  { label: "Politica de Privacidad", href: "/politica-de-privacidad" },
+  { label: "Politica de Cookies", href: "/politica-de-cookies" },
 ];
 
 export function getBookBySlug(slug: string) {

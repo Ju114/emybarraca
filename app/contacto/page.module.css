@@ -17,6 +17,15 @@
   font-weight: 600;
 }
 
+.whatsappButton {
+  margin-top: 1rem;
+}
+
+.whatsappIcon {
+  width: 1rem;
+  height: 1rem;
+}
+
 @media (max-width: 900px) {
   .grid {
     grid-template-columns: 1fr;

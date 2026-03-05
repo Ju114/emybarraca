@@ -20,7 +20,12 @@ export default function AboutPage() {
     description: siteConfig.shortBioFooter,
     url: getCanonical("/sobre-emy"),
     image: "/images/author-placeholder.svg",
-    sameAs: [siteConfig.social.youtube, siteConfig.social.facebook],
+    sameAs: [
+      siteConfig.social.youtube,
+      siteConfig.social.facebook,
+      siteConfig.social.instagram,
+      siteConfig.social.tiktok,
+    ],
     nationality: "ES",
   };
 

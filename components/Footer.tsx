@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { quickLinks, siteConfig } from "@/data/site";
+import { legalLinks, quickLinks, siteConfig } from "@/data/site";
 import { SocialLinks } from "./SocialLinks";
 import styles from "./Footer.module.css";
 
@@ -25,7 +25,18 @@ export function Footer() {
 
         <div>
           <p className={styles.blockTitle}>Redes sociales</p>
-          <SocialLinks compact />
+          <SocialLinks compact iconOnly />
+        </div>
+
+        <div>
+          <p className={styles.blockTitle}>Legal</p>
+          <ul className={styles.links}>
+            {legalLinks.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href}>{item.label}</Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 
