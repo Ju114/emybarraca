@@ -3,33 +3,6 @@
   gap: 1rem;
 }
 
-.summaryStrip {
-  display: grid;
-  gap: 0.8rem;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.summaryCard {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  background: var(--color-surface);
-  padding: 0.95rem 1rem;
-  box-shadow: var(--shadow-card);
-}
-
-.summaryValue {
-  color: var(--color-primary);
-  font-family: var(--font-heading);
-  font-size: 1.55rem;
-  line-height: 1.05;
-}
-
-.summaryLabel {
-  margin-top: 0.35rem;
-  color: var(--color-text-muted);
-  line-height: 1.6;
-}
-
 .grid {
   display: grid;
   gap: 1.15rem;
@@ -37,14 +10,12 @@
 }
 
 @media (max-width: 1100px) {
-  .summaryStrip,
   .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 700px) {
-  .summaryStrip,
   .grid {
     grid-template-columns: 1fr;
   }

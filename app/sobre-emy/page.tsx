@@ -1,18 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { AuthorPortrait } from "@/components/AuthorPortrait";
-import { BookCover } from "@/components/BookCover";
-import { getBookBySlug, siteConfig } from "@/data/site";
+import { siteConfig } from "@/data/site";
 import { buildMetadata, getCanonical } from "@/lib/seo";
 import styles from "./page.module.css";
 
-type NovelSpotlight = {
-  slug: string;
-  publicationDate: string;
-  distinction: string;
-  publisher: string;
-  summary: string;
-  tags: string[];
+type FocusCard = {
+  title: string;
+  text: string;
+};
+
+type TrajectoryCard = {
+  eyebrow: string;
+  title: string;
+  text: string;
+  href: string;
+  action: string;
 };
 
 type RecognitionItem = {
@@ -33,34 +36,53 @@ type RecognitionGroup = {
 };
 
 const authorLead =
-  "Emy Barraca, nombre literario de Emilia García Castro, desarrolla una trayectoria que une la novela romántica contemporánea con el relato, la carta literaria y el microrrelato. Su recorrido combina obra publicada con Ediciones Rubeo y una presencia constante en certámenes literarios, donde ha reunido un palmarés sólido y sostenido en el tiempo.";
+  "Emy Barraca, nombre literario de Emilia García Castro, ha construido una trayectoria que une la novela con la narrativa breve. Su escritura se mueve entre la emoción, la memoria y los vínculos que dejan huella, y encuentra en cada formato una forma distinta de contar con cercanía, sensibilidad y pulso literario.";
 
 const authorBio = [
-  "Bajo el nombre de Emy Barraca, Emilia García Castro ha consolidado una voz narrativa que se mueve con naturalidad entre la amplitud emocional de la novela y la intensidad del texto breve.",
-  "Su obra dialoga con los afectos, la memoria y la experiencia íntima, y esa sensibilidad se proyecta tanto en la ficción de largo aliento como en relatos, cartas y microrrelatos reconocidos en numerosos certámenes.",
-  "El resultado es el perfil de una autora con recorrido, obra publicada y una relación constante con la escritura literaria: una trayectoria construida con oficio, continuidad y una clara vocación narrativa.",
+  "Bajo el nombre de Emy Barraca, Emilia García Castro desarrolla una voz narrativa atenta a lo íntimo, a los afectos y a los cambios que atraviesan una vida. En su obra conviven la amplitud emocional de la novela y la intensidad concentrada del texto breve.",
+  "Su recorrido como autora no se sostiene solo en la publicación de dos novelas, sino también en una práctica continuada de escritura en relatos, cartas y microrrelatos, terreno en el que ha reunido reconocimientos de forma constante a lo largo de los años.",
+  "Esa combinación de obra publicada y trayectoria premiada dibuja un perfil literario sólido y reconocible: una autora contemporánea que escribe con sensibilidad, constancia y una clara fidelidad a su universo narrativo.",
 ];
 
-const novelSpotlights: NovelSpotlight[] = [
+const focusCards: FocusCard[] = [
   {
-    slug: "cultivar-dos-jardines",
-    publicationDate: "Octubre de 2023",
-    distinction:
-      'Ganadora del I Certamen Internacional de Novela Corta Romántica "Sanditon. Homenaje a Jane Austen".',
-    publisher: "Ediciones Rubeo",
-    summary:
-      "Su primera novela publicada obtuvo uno de los hitos decisivos de su trayectoria reciente y abrió su etapa editorial con una distinción internacional de especial relevancia en el ámbito romántico.",
-    tags: ["Premio internacional", "Novela corta romántica", "Ediciones Rubeo"],
+    title: "Obra publicada",
+    text: "Dos novelas publicadas entre 2023 y 2025, vinculadas a hitos relevantes de su trayectoria reciente.",
   },
   {
-    slug: "un-oceano-de-ida-y-vuelta",
-    publicationDate: "Mayo de 2025",
-    distinction:
-      "Finalista del IV Premio Internacional de Novela Ciudad Ibera de Tugia.",
-    publisher: "Ediciones Rubeo",
-    summary:
-      "Con esta novela, Emy Barraca reafirma su faceta de novelista con una nueva publicación y un reconocimiento destacado dentro del circuito de premios literarios vinculados a la narrativa contemporánea.",
-    tags: ["Finalista internacional", "Narrativa contemporánea", "Ediciones Rubeo"],
+    title: "Narrativa breve",
+    text: "Una presencia constante en certámenes de relatos, cartas literarias y microrrelatos.",
+  },
+  {
+    title: "Trayectoria sostenida",
+    text: "Un recorrido reconocible, construido con continuidad, oficio y vocación literaria.",
+  },
+];
+
+const trajectoryCards: TrajectoryCard[] = [
+  {
+    eyebrow: "2023 · Novela publicada",
+    title: "Cultivar dos jardines",
+    text:
+      'Ganadora del I Certamen Internacional de Novela Corta Romántica "Sanditon. Homenaje a Jane Austen" y publicada por Ediciones Rubeo en octubre de 2023.',
+    href: "/novelas/cultivar-dos-jardines",
+    action: "Ver novela",
+  },
+  {
+    eyebrow: "2025 · Novela publicada",
+    title: "Un océano de ida y vuelta",
+    text:
+      "Finalista del IV Premio Internacional de Novela Ciudad Ibera de Tugia y publicada por Ediciones Rubeo en mayo de 2025.",
+    href: "/novelas/un-oceano-de-ida-y-vuelta",
+    action: "Ver novela",
+  },
+  {
+    eyebrow: "Relato, carta y microrrelato",
+    title: "Una trayectoria premiada en texto breve",
+    text:
+      "Primeros, segundos y terceros premios, además de menciones y accésits, consolidan una trayectoria continuada en certámenes literarios.",
+    href: "#reconocimientos",
+    action: "Ver reconocimientos",
   },
 ];
 
@@ -322,33 +344,10 @@ const recognitionCount = recognitionGroups.reduce(
   0,
 );
 
-const heroStats = [
-  {
-    value: "2",
-    label: "Novelas publicadas",
-    detail: "Dos hitos editoriales consecutivos con Ediciones Rubeo.",
-  },
-  {
-    value: `${recognitionCount}`,
-    label: "Reconocimientos literarios",
-    detail: "Entre relatos, cartas, microrrelatos y reseña literaria.",
-  },
-  {
-    value: "8",
-    label: "Primeros premios",
-    detail: "Una constancia premiada en certámenes de alcance diverso.",
-  },
-  {
-    value: "4",
-    label: "Líneas de trabajo",
-    detail: "Novela, relato, carta literaria y microrrelato.",
-  },
-];
-
 export const metadata: Metadata = buildMetadata({
   title: "Sobre Emy",
   description:
-    "Biografía y trayectoria literaria de Emy Barraca, nombre literario de Emilia García Castro, novelista y autora de relatos reconocidos.",
+    "Biografía y trayectoria literaria de Emy Barraca, nombre literario de Emilia García Castro, novelista y autora de narrativa breve premiada.",
   pathname: "/sobre-emy",
 });
 
@@ -371,7 +370,7 @@ export default function AboutPage() {
       siteConfig.social.facebook,
       siteConfig.instagramUrl,
       siteConfig.tiktokUrl,
-    ],
+    ].filter(Boolean),
     nationality: "ES",
   };
 
@@ -382,23 +381,23 @@ export default function AboutPage() {
           <p className={styles.eyebrow}>Sobre la autora</p>
           <h1 className={styles.heroTitle}>{siteConfig.name}</h1>
           <p className={styles.heroSubtitle}>
-            Nombre literario de {siteConfig.legalName}
+            Emilia García Castro escribe bajo el nombre de Emy Barraca
           </p>
           <p className={styles.heroLead}>{authorLead}</p>
 
           <ul className={styles.tagList} aria-label="Ámbitos literarios">
             <li>Novela</li>
-            <li>Relatos</li>
-            <li>Cartas</li>
-            <li>Microrrelatos</li>
+            <li>Narrativa breve</li>
+            <li>Carta literaria</li>
+            <li>Microrrelato</li>
           </ul>
 
           <div className={styles.heroActions}>
-            <Link className="btn btnPrimary" href="#novelas-publicadas">
-              Ver novelas publicadas
+            <Link className="btn btnPrimary" href="#trayectoria">
+              Ver trayectoria
             </Link>
             <Link className="btn btnGhost" href="#reconocimientos">
-              Recorrido literario
+              Reconocimientos
             </Link>
           </div>
         </div>
@@ -410,17 +409,17 @@ export default function AboutPage() {
             frameClassName={styles.authorFrame}
           />
           <figcaption className={styles.caption}>
-            Escritura narrativa entre la novela, el relato breve y la carta literaria.
+            Una voz literaria que alterna la novela con el relato breve sin perder identidad
+            ni sensibilidad narrativa.
           </figcaption>
         </figure>
       </section>
 
-      <section className={styles.statsGrid} aria-label="Resumen de trayectoria">
-        {heroStats.map((stat) => (
-          <article key={stat.label} className={styles.statCard}>
-            <p className={styles.statValue}>{stat.value}</p>
-            <h2 className={styles.statLabel}>{stat.label}</h2>
-            <p className={styles.statDetail}>{stat.detail}</p>
+      <section className={styles.focusGrid} aria-label="Claves de la autora">
+        {focusCards.map((card) => (
+          <article key={card.title} className={styles.focusCard}>
+            <h2 className={styles.focusTitle}>{card.title}</h2>
+            <p className={styles.focusText}>{card.text}</p>
           </article>
         ))}
       </section>
@@ -429,11 +428,12 @@ export default function AboutPage() {
         <div className={styles.sectionHeader}>
           <p className={styles.sectionEyebrow}>Emy Barraca, autora</p>
           <h2 id="autora-heading" className="sectionTitle">
-            Una voz literaria con obra publicada y recorrido premiado
+            Una presentación más biográfica y cercana
           </h2>
           <p className={styles.sectionLead}>
-            La faceta de novelista y la trayectoria en relato breve se refuerzan mutuamente y
-            dibujan una presencia literaria reconocible, madura y sostenida.
+            Esta página reúne el contexto de autora, los hitos principales de su recorrido y
+            una panorámica clara de su trayectoria literaria, sin duplicar el contenido propio
+            de las fichas de novelas o de la página de narrativa breve.
           </p>
         </div>
 
@@ -446,97 +446,62 @@ export default function AboutPage() {
 
           <aside className={styles.asideStack}>
             <article className={`card ${styles.snapshotCard}`}>
-              <h3 className={styles.cardTitle}>Trayectoria en breve</h3>
+              <h3 className={styles.cardTitle}>Rasgos de su escritura</h3>
               <dl className={styles.snapshotList}>
                 <div>
-                  <dt>Firma literaria</dt>
-                  <dd>{siteConfig.name}</dd>
+                  <dt>Emoción</dt>
+                  <dd>Historias donde los afectos y la intimidad ocupan un lugar central.</dd>
                 </div>
                 <div>
-                  <dt>Nombre completo</dt>
-                  <dd>{siteConfig.legalName}</dd>
+                  <dt>Memoria</dt>
+                  <dd>La huella del pasado y el regreso a los lugares que transforman.</dd>
                 </div>
                 <div>
-                  <dt>Editorial</dt>
-                  <dd>Ediciones Rubeo</dd>
+                  <dt>Formas</dt>
+                  <dd>Novela, relato, carta literaria y microrrelato como espacios complementarios.</dd>
                 </div>
                 <div>
-                  <dt>Obra publicada</dt>
-                  <dd>Dos novelas publicadas, en 2023 y 2025</dd>
-                </div>
-                <div>
-                  <dt>Reconocimientos</dt>
-                  <dd>Premios, menciones y accésits en relatos, cartas y microrrelatos</dd>
+                  <dt>Trayectoria</dt>
+                  <dd>Obra publicada y reconocimientos sostenidos en certámenes literarios.</dd>
                 </div>
               </dl>
             </article>
 
             <article className={`card ${styles.noteCard}`}>
-              <h3 className={styles.cardTitle}>Hitos recientes</h3>
+              <h3 className={styles.cardTitle}>Una presencia de autora</h3>
               <p>
-                En novela, su trayectoria reciente queda marcada por dos hitos claros: el premio
-                internacional obtenido con <em>Cultivar dos jardines</em> y la condición de
-                finalista alcanzada con <em>Un océano de ida y vuelta</em>.
+                La combinación de publicaciones recientes y una trayectoria premiada en texto
+                breve sitúa a Emy Barraca como una autora con recorrido, credibilidad y una voz
+                narrativa ya reconocible dentro de su propio universo literario.
               </p>
             </article>
           </aside>
         </div>
       </section>
 
-      <section
-        id="novelas-publicadas"
-        className={styles.section}
-        aria-labelledby="novelas-heading"
-      >
+      <section id="trayectoria" className={styles.section} aria-labelledby="trayectoria-heading">
         <div className={styles.sectionHeader}>
-          <p className={styles.sectionEyebrow}>Faceta de novelista</p>
-          <h2 id="novelas-heading" className="sectionTitle">
-            Novelas publicadas
+          <p className={styles.sectionEyebrow}>Trayectoria literaria</p>
+          <h2 id="trayectoria-heading" className="sectionTitle">
+            Hitos que ordenan su recorrido
           </h2>
           <p className={styles.sectionLead}>
-            Su obra novelística ha llegado al catálogo de Ediciones Rubeo con dos publicaciones
-            ligadas a reconocimientos de relieve dentro del circuito de premios literarios.
+            La novela publicada y el reconocimiento sostenido en certámenes de narrativa breve
+            se entrelazan en una trayectoria construida con continuidad.
           </p>
         </div>
 
-        <div className={styles.novelsGrid}>
-          {novelSpotlights.map((novel) => {
-            const book = getBookBySlug(novel.slug);
-
-            if (!book) {
-              return null;
-            }
-
-            return (
-              <article key={novel.slug} className={styles.novelCard}>
-                <div className={styles.novelCover}>
-                  <BookCover
-                    book={book}
-                    sizes="(max-width: 767px) 72vw, (max-width: 1100px) 28vw, 230px"
-                  />
-                </div>
-
-                <div className={styles.novelBody}>
-                  <p className={styles.novelKicker}>
-                    {novel.publisher} · {novel.publicationDate}
-                  </p>
-                  <h3 className={styles.novelTitle}>{book.title}</h3>
-                  <p className={styles.novelDistinction}>{novel.distinction}</p>
-                  <p className={styles.novelSummary}>{novel.summary}</p>
-
-                  <ul className={styles.novelTags} aria-label={`Claves de ${book.title}`}>
-                    {novel.tags.map((tag) => (
-                      <li key={tag}>{tag}</li>
-                    ))}
-                  </ul>
-
-                  <Link className="btn btnGhost" href={`/novelas/${book.slug}`}>
-                    Ver ficha de la novela
-                  </Link>
-                </div>
-              </article>
-            );
-          })}
+        <div className={styles.momentsGrid}>
+          {trajectoryCards.map((card) => (
+            <article key={card.title} className={`card ${styles.momentCard}`}>
+              <p className={styles.momentEyebrow}>{card.eyebrow}</p>
+              <h3 className={styles.momentTitle}>{card.title}</h3>
+              <p className={styles.momentText}>{card.text}</p>
+              <Link className="btn btnGhost" href={card.href}>
+                {card.action}
+              </Link>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -548,13 +513,12 @@ export default function AboutPage() {
         <div className={styles.sectionHeader}>
           <p className={styles.sectionEyebrow}>Reconocimientos literarios</p>
           <h2 id="reconocimientos-heading" className="sectionTitle">
-            Una trayectoria sólida en relatos, cartas y microrrelatos
+            Un recorrido premiado con continuidad y amplitud
           </h2>
           <p className={styles.sectionLead}>
-            Más allá de un único premio, el recorrido de Emy Barraca muestra continuidad,
-            diversidad y presencia sostenida en certámenes literarios. El conjunto transmite
-            solidez sin perder cercanía: una autora que ha trabajado de forma constante en el
-            territorio del texto breve.
+            Los premios, menciones y accésits no aparecen aquí como un bloque curricular frío,
+            sino como la prueba de una dedicación sostenida a la escritura en distintos registros
+            del texto breve.
           </p>
         </div>
 
@@ -562,13 +526,12 @@ export default function AboutPage() {
           <article className={`card ${styles.recognitionLeadCard}`}>
             <h3 className={styles.cardTitle}>Panorámica de la trayectoria</h3>
             <p>
-              Entre 2016 y 2023, Emilia García Castro ha reunido primeros, segundos y terceros
-              premios, además de menciones y accésits, en certámenes de relatos, cartas de amor,
-              microrrelatos y reseña literaria.
+              Entre 2016 y 2023, Emilia García Castro ha reunido {recognitionCount} distinciones
+              entre primeros, segundos y terceros premios, además de menciones y accésits.
             </p>
             <p>
-              Esta acumulación de reconocimientos no responde a un episodio aislado, sino a una
-              trayectoria constante que acompaña y refuerza su faceta de novelista.
+              El conjunto habla de continuidad, diversidad de formatos y una presencia literaria
+              que acompaña y refuerza su faceta de novelista.
             </p>
           </article>
 
@@ -588,7 +551,7 @@ export default function AboutPage() {
             <details key={group.id} className={styles.accordion} open={index === 0}>
               <summary className={styles.accordionSummary}>
                 <div>
-                  <p className={styles.accordionEyebrow}>Detalle curricular</p>
+                  <p className={styles.accordionEyebrow}>Detalle de trayectoria</p>
                   <h3 className={styles.accordionTitle}>{group.title}</h3>
                   <p className={styles.accordionText}>{group.summary}</p>
                 </div>
@@ -621,12 +584,12 @@ export default function AboutPage() {
       <section className={styles.closingCard}>
         <div>
           <p className={styles.sectionEyebrow}>Cierre</p>
-          <h2 className="sectionTitle">Una obra que crece desde la constancia</h2>
+          <h2 className="sectionTitle">Una autora que escribe desde la constancia</h2>
           <p className={styles.closingText}>
-            La combinación de novela publicada y reconocimientos continuados en el ámbito del
-            relato dibuja una carrera literaria con fundamento, sensibilidad y proyección. Bajo el
-            nombre de Emy Barraca, Emilia García Castro sigue construyendo una presencia de autora
-            que une cercanía, oficio narrativo y prestigio ganado texto a texto.
+            Bajo el nombre de Emy Barraca, Emilia García Castro ha ido construyendo una presencia
+            literaria con obra publicada, sensibilidad narrativa y un recorrido premiado que
+            refuerza su credibilidad sin restarle cercanía. El resultado es una autora con voz,
+            trayectoria y un universo propio en expansión.
           </p>
         </div>
 
@@ -634,8 +597,8 @@ export default function AboutPage() {
           <Link className="btn btnPrimary" href="/novelas">
             Explorar novelas
           </Link>
-          <Link className="btn btnGhost" href="/contacto">
-            Contacto
+          <Link className="btn btnGhost" href="/relatos">
+            Leer narrativa breve
           </Link>
         </div>
       </section>

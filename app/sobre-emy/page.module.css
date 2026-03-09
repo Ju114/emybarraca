@@ -38,7 +38,8 @@
 
 .eyebrow,
 .sectionEyebrow,
-.accordionEyebrow {
+.accordionEyebrow,
+.momentEyebrow {
   margin: 0;
   color: var(--color-primary);
   font-family: var(--font-ui);
@@ -60,6 +61,7 @@
   font-family: var(--font-ui);
   font-size: 0.98rem;
   letter-spacing: 0.03em;
+  line-height: 1.7;
 }
 
 .heroLead {
@@ -68,8 +70,7 @@
   line-height: 1.85;
 }
 
-.tagList,
-.novelTags {
+.tagList {
   display: flex;
   flex-wrap: wrap;
   gap: 0.55rem;
@@ -78,8 +79,7 @@
   list-style: none;
 }
 
-.tagList li,
-.novelTags li {
+.tagList li {
   border: 1px solid color-mix(in srgb, var(--color-border) 88%, white);
   border-radius: 999px;
   background: color-mix(in srgb, var(--color-bg) 86%, white);
@@ -108,20 +108,20 @@
 }
 
 .caption {
-  max-width: 28ch;
+  max-width: 30ch;
   color: var(--color-text-muted);
   font-size: 0.92rem;
   line-height: 1.65;
   text-align: center;
 }
 
-.statsGrid {
+.focusGrid {
   display: grid;
   gap: 0.9rem;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.statCard {
+.focusCard {
   border: 1px solid var(--color-border);
   border-radius: 18px;
   background: var(--color-surface);
@@ -129,24 +129,16 @@
   box-shadow: var(--shadow-media-soft);
 }
 
-.statValue {
+.focusTitle {
   margin: 0;
   color: var(--color-primary);
-  font-family: var(--font-heading);
-  font-size: clamp(2rem, 3vw, 2.6rem);
-  line-height: 1;
+  font-size: 1.12rem;
 }
 
-.statLabel {
-  margin: 0.6rem 0 0;
-  color: var(--color-primary);
-  font-size: 1.08rem;
-}
-
-.statDetail {
+.focusText {
   margin-top: 0.45rem;
   color: var(--color-text-muted);
-  line-height: 1.65;
+  line-height: 1.7;
 }
 
 .section {
@@ -175,7 +167,10 @@
 }
 
 .narrativeCard,
-.recognitionLeadCard {
+.recognitionLeadCard,
+.snapshotCard,
+.noteCard,
+.momentCard {
   display: grid;
   gap: 1rem;
 }
@@ -183,7 +178,8 @@
 .narrativeCard p,
 .recognitionLeadCard p,
 .noteCard p,
-.closingText {
+.closingText,
+.momentText {
   line-height: 1.8;
 }
 
@@ -196,12 +192,6 @@
   margin: 0;
   color: var(--color-primary);
   font-size: 1.3rem;
-}
-
-.snapshotCard,
-.noteCard {
-  display: grid;
-  gap: 0.85rem;
 }
 
 .snapshotList {
@@ -237,58 +227,21 @@
   line-height: 1.6;
 }
 
-.novelsGrid {
+.momentsGrid {
   display: grid;
   gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.novelCard {
-  display: grid;
-  gap: clamp(1rem, 2.2vw, 1.4rem);
-  grid-template-columns: minmax(180px, 230px) minmax(0, 1fr);
-  align-items: center;
-  border: 1px solid var(--color-border);
-  border-radius: 24px;
-  background: var(--color-surface);
-  padding: clamp(1rem, 2.6vw, 1.4rem);
-}
-
-.novelCover {
-  width: min(100%, 14.5rem);
-  justify-self: center;
-}
-
-.novelBody {
-  display: grid;
-  min-width: 0;
-  gap: 0.78rem;
-  align-content: center;
-}
-
-.novelKicker {
-  color: var(--color-text-muted);
-  font-family: var(--font-ui);
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.novelTitle {
+.momentTitle {
   margin: 0;
   color: var(--color-primary);
-  font-size: clamp(1.65rem, 2.4vw, 2rem);
+  font-size: 1.45rem;
 }
 
-.novelDistinction {
-  color: var(--color-primary);
-  font-weight: 600;
-  line-height: 1.7;
-}
-
-.novelSummary {
-  color: var(--color-text);
-  line-height: 1.8;
+.momentCard :global(.btn) {
+  justify-self: start;
+  margin-top: auto;
 }
 
 .recognitionSummaryGrid {
@@ -465,7 +418,8 @@
 @media (max-width: 1100px) {
   .hero,
   .authorGrid,
-  .recognitionIntro {
+  .recognitionIntro,
+  .momentsGrid {
     grid-template-columns: 1fr;
   }
 
@@ -477,20 +431,16 @@
     text-align: left;
   }
 
-  .statsGrid {
+  .focusGrid,
+  .recognitionSummaryGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 900px) {
-  .novelCard,
   .closingCard,
   .recognitionList {
     grid-template-columns: 1fr;
-  }
-
-  .novelCover {
-    width: min(72vw, 15rem);
   }
 
   .closingActions {
@@ -512,7 +462,8 @@
   .sectionLead,
   .narrativeCard p,
   .recognitionLeadCard p,
-  .novelSummary,
+  .focusText,
+  .momentText,
   .closingText {
     font-size: 0.98rem;
   }
@@ -521,7 +472,7 @@
     width: min(78vw, 18rem);
   }
 
-  .statsGrid,
+  .focusGrid,
   .recognitionSummaryGrid,
   .recognitionList {
     grid-template-columns: 1fr;
@@ -536,7 +487,8 @@
   }
 
   .heroActions :global(.btn),
-  .closingActions :global(.btn) {
+  .closingActions :global(.btn),
+  .momentCard :global(.btn) {
     flex: 1 1 100%;
   }
 }

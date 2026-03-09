@@ -52,18 +52,18 @@ export const siteConfig = {
   language: "es-ES",
   tagline: "Historias que vuelven al origen, con la emoción en primer plano.",
   shortIntro:
-    "Emy Barraca escribe narrativa romántica y realista con una mirada atenta a la emoción, la memoria y los vínculos. Su trayectoria reúne novela publicada con Ediciones Rubeo y un recorrido reconocido en certámenes de relatos, cartas y microrrelatos.",
+    "Emy Barraca escribe historias donde la emoción, la memoria y los vínculos ocupan el centro de la escena. Su narrativa se mueve entre la intimidad de los afectos y la huella de los lugares que transforman una vida.",
   contactIntro:
     "Si eres lector, editorial o profesional cultural, este es el mejor punto de encuentro para propuestas, entrevistas y colaboraciones.",
   shortBioFooter:
     "Emy Barraca, nombre literario de Emilia García Castro, es autora de novela y relato premiado. Su obra explora la emoción, la memoria y los vínculos que dejan huella.",
   longBio:
-    "EDITABLE: Emy Barraca (España) desarrolla una obra centrada en el drama sentimental y la narrativa realista. Su escritura se caracteriza por una voz clara, sensible y atenta a los matices del vínculo humano. A lo largo de su trayectoria, ha trabajado en relatos y novelas que conectan escenarios internacionales con raíces emocionales profundas.\n\nEDITABLE: Actualmente combina la publicación de novelas con proyectos de relato breve y colaboraciones literarias. Esta sección debe actualizarse con datos verificados sobre formación, hitos editoriales, medios y presentaciones.",
+    "Emy Barraca, nombre literario de Emilia García Castro, desarrolla una trayectoria literaria que une la novela con la narrativa breve. Su escritura se mueve en torno a la emoción, la memoria y los vínculos que transforman una vida.\n\nSu obra publicada y sus reconocimientos en certámenes de relato, carta literaria y microrrelato dibujan una voz constante, cercana y literaria, construida con continuidad y vocación narrativa.",
   contactEmail: "contacto@emybarraca.com", // EDITABLE
   // EDITABLE: URLs centrales para canales de contacto.
   instagramUrl: "https://instagram.com/emybarraca", // EDITABLE (placeholder)
   tiktokUrl: "https://tiktok.com/@emybarraca", // EDITABLE (placeholder)
-  whatsappUrl: "https://wa.me/34000000000", // EDITABLE (placeholder)
+  whatsappUrl: "",
   social: {
     youtube: "https://www.youtube.com/@emybarraca", // EDITABLE
     facebook: "https://www.facebook.com/emybarraca", // EDITABLE
@@ -88,14 +88,12 @@ export const books: Book[] = [
     genreOrTone: "Drama sentimental",
     setting: "Gingerville, India",
     synopsis:
-      "EDITABLE: Una historia de decisiones intimas y segundas oportunidades en un entorno que obliga a elegir entre la lealtad al pasado y la promesa de una vida nueva.",
+      'Novela publicada por Ediciones Rubeo en octubre de 2023 y ganadora del I Certamen Internacional de Novela Corta Romántica "Sanditon. Homenaje a Jane Austen", ambientada en Gingerville, India.',
     coverImage: "/images/books/cultivar-dos-jardines.jpg",
-    amazonUrl: "https://www.amazon.es/dp/EDITABLE-CULTIVAR",
     publicationYear: "2023",
     metadata: {
       language: "Español",
       editorial: "Ediciones Rubeo",
-      isbn: "EDITABLE",
       pages: 0,
     },
   },
@@ -107,14 +105,12 @@ export const books: Book[] = [
     theme: "Herencia y empoderamiento",
     setting: "Miami y Asturias",
     synopsis:
-      "EDITABLE: Entre dos orillas y una herencia inesperada, la protagonista reconstruye su identidad y aprende a nombrar su propia voz.",
+      "Novela publicada por Ediciones Rubeo en mayo de 2025 y finalista del IV Premio Internacional de Novela Ciudad Ibera de Tugia, ambientada entre Miami y Asturias.",
     coverImage: "/images/books/un-oceano-de-ida-y-vuelta.jpeg",
-    amazonUrl: "https://www.amazon.es/dp/EDITABLE-OCEANO",
     publicationYear: "2025",
     metadata: {
       language: "Español",
       editorial: "Ediciones Rubeo",
-      isbn: "EDITABLE",
       pages: 0,
     },
   },
@@ -123,12 +119,10 @@ export const books: Book[] = [
     title: "Recopilación de relatos",
     type: "Recopilacion",
     status: "in-progress",
-    synopsis:
-      "EDITABLE: Proyecto en proceso que reunira relatos sobre memoria, deseo y pertenencia.",
+    synopsis: "Proyecto en preparación que reunirá una selección de narrativa breve de la autora.",
     coverImage: "/images/books/recopilacion-de-relatos.svg",
     metadata: {
       language: "Español",
-      editorial: "EDITABLE",
     },
   },
 ];
@@ -354,6 +348,31 @@ export const legalLinks = [
 
 export function getBookBySlug(slug: string) {
   return books.find((book) => book.slug === slug);
+}
+
+export function isPlaceholderValue(value?: string | null) {
+  return !value || value.includes("EDITABLE");
+}
+
+export function hasBookPurchaseLink(url?: string) {
+  return Boolean(url && !isPlaceholderValue(url));
+}
+
+export function getBookDescription(book: Book) {
+  if (!isPlaceholderValue(book.synopsis)) {
+    return book.synopsis;
+  }
+
+  switch (book.slug) {
+    case "cultivar-dos-jardines":
+      return 'Novela publicada por Ediciones Rubeo en octubre de 2023 y ganadora del I Certamen Internacional de Novela Corta Romántica "Sanditon. Homenaje a Jane Austen".';
+    case "un-oceano-de-ida-y-vuelta":
+      return "Novela publicada por Ediciones Rubeo en mayo de 2025 y finalista del IV Premio Internacional de Novela Ciudad Ibera de Tugia.";
+    case "recopilacion-de-relatos":
+      return "Proyecto en proceso dedicado a reunir relatos y textos breves de la autora.";
+    default:
+      return "";
+  }
 }
 
 export function getFeaturedBooks() {

@@ -2,7 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BookCover } from "@/components/BookCover";
-import { books, getBookBySlug } from "@/data/site";
+import {
+  books,
+  getBookBySlug,
+  getBookDescription,
+  hasBookPurchaseLink,
+  isPlaceholderValue,
+} from "@/data/site";
 import { buildMetadata, getCanonical } from "@/lib/seo";
 import styles from "./page.module.css";
 
@@ -28,7 +34,7 @@ export async function generateMetadata({ params }: NovelPageProps): Promise<Meta
 
   return buildMetadata({
     title: book.title,
-    description: book.synopsis,
+    description: getBookDescription(book),
     pathname: `/novelas/${book.slug}`,
     image: book.coverImage,
   });
@@ -43,12 +49,23 @@ export default async function NovelDetailPage({ params }: NovelPageProps) {
   }
 
   const isPublished = book.status === "published";
+  const description = getBookDescription(book);
+  const purchaseUrl = hasBookPurchaseLink(book.amazonUrl) ? book.amazonUrl : undefined;
+  const metadataItems = [
+    { label: "Tipo", value: book.type },
+    { label: "Género/Tono", value: book.genreOrTone },
+    { label: "Tema", value: book.theme },
+    { label: "Ambientación", value: book.setting },
+    { label: "Editorial", value: isPlaceholderValue(book.metadata.editorial) ? undefined : book.metadata.editorial },
+    { label: "ISBN", value: isPlaceholderValue(book.metadata.isbn) ? undefined : book.metadata.isbn },
+    { label: "Idioma", value: isPlaceholderValue(book.metadata.language) ? undefined : book.metadata.language },
+  ].filter((item): item is { label: string; value: string } => Boolean(item.value));
 
   const schema = {
     "@context": "https://schema.org",
     "@type": "Book",
     name: book.title,
-    description: book.synopsis,
+    description,
     image: book.coverImage,
     url: getCanonical(`/novelas/${book.slug}`),
     inLanguage: "es",
@@ -57,12 +74,12 @@ export default async function NovelDetailPage({ params }: NovelPageProps) {
       name: "Emy Barraca",
     },
     genre: book.genreOrTone ?? book.theme ?? "Narrativa",
-    publisher: book.metadata.editorial || "EDITABLE",
-    isbn: book.metadata.isbn || undefined,
-    offers: isPublished
+    publisher: isPlaceholderValue(book.metadata.editorial) ? undefined : book.metadata.editorial,
+    isbn: isPlaceholderValue(book.metadata.isbn) ? undefined : book.metadata.isbn,
+    offers: isPublished && purchaseUrl
       ? {
           "@type": "Offer",
-          url: book.amazonUrl,
+          url: purchaseUrl,
           availability: "https://schema.org/InStock",
         }
       : undefined,
@@ -81,43 +98,15 @@ export default async function NovelDetailPage({ params }: NovelPageProps) {
         <div className={styles.content}>
           <p className={styles.kicker}>{isPublished ? "Novela publicada" : "En proceso"}</p>
           <h1 className="pageTitle">{book.title}</h1>
-          <p className={styles.synopsis}>{book.synopsis}</p>
+          <p className={styles.synopsis}>{description}</p>
 
           <dl className={styles.meta}>
-            <div>
-              <dt>Tipo</dt>
-              <dd>{book.type}</dd>
-            </div>
-            {book.genreOrTone ? (
-              <div>
-                <dt>Genero/Tono</dt>
-                <dd>{book.genreOrTone}</dd>
+            {metadataItems.map((item) => (
+              <div key={item.label}>
+                <dt>{item.label}</dt>
+                <dd>{item.value}</dd>
               </div>
-            ) : null}
-            {book.theme ? (
-              <div>
-                <dt>Tema</dt>
-                <dd>{book.theme}</dd>
-              </div>
-            ) : null}
-            {book.setting ? (
-              <div>
-                <dt>Ambientacion</dt>
-                <dd>{book.setting}</dd>
-              </div>
-            ) : null}
-            <div>
-              <dt>Editorial</dt>
-              <dd>{book.metadata.editorial || "EDITABLE"}</dd>
-            </div>
-            <div>
-              <dt>ISBN</dt>
-              <dd>{book.metadata.isbn || "EDITABLE"}</dd>
-            </div>
-            <div>
-              <dt>Idioma</dt>
-              <dd>{book.metadata.language || "Espanol"}</dd>
-            </div>
+            ))}
           </dl>
 
           <div className={styles.actions}>
@@ -125,18 +114,16 @@ export default async function NovelDetailPage({ params }: NovelPageProps) {
               Volver al listado
             </Link>
 
-            {isPublished && book.amazonUrl ? (
+            {purchaseUrl ? (
               <Link
                 className="btn btnPrimary"
-                href={book.amazonUrl}
+                href={purchaseUrl}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Comprar en Amazon
               </Link>
-            ) : (
-              <span className={styles.note}>Disponible proximamente</span>
-            )}
+            ) : !isPublished ? <span className={styles.note}>Proyecto en preparación</span> : null}
           </div>
         </div>
       </article>

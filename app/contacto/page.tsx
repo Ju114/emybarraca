@@ -30,7 +30,7 @@ export default function ContactPage() {
       action: "Escribir por WhatsApp",
       icon: <SocialIcon name="whatsapp" className={styles.channelIcon} />,
     },
-  ];
+  ].filter((channel) => Boolean(channel.href));
 
   return (
     <div className="pageShell">

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Book } from "@/data/site";
+import { getBookDescription, hasBookPurchaseLink, type Book } from "@/data/site";
 import { BookCover } from "./BookCover";
 import styles from "./BookCard.module.css";
 
@@ -10,6 +10,8 @@ type BookCardProps = {
 
 export function BookCard({ book, showMetadata = true }: BookCardProps) {
   const isPublished = book.status === "published";
+  const description = getBookDescription(book);
+  const purchaseUrl = hasBookPurchaseLink(book.amazonUrl) ? book.amazonUrl : undefined;
 
   return (
     <article className={styles.card}>
@@ -30,19 +32,19 @@ export function BookCard({ book, showMetadata = true }: BookCardProps) {
         <h3 className={styles.title}>
           <Link href={`/novelas/${book.slug}`}>{book.title}</Link>
         </h3>
-        <p className={styles.synopsis}>{book.synopsis}</p>
+        <p className={styles.synopsis}>{description}</p>
 
         {showMetadata ? (
           <dl className={styles.meta}>
             {book.setting ? (
               <div>
-                <dt>Ambientacion</dt>
+                <dt>Ambientación</dt>
                 <dd>{book.setting}</dd>
               </div>
             ) : null}
             {book.genreOrTone ? (
               <div>
-                <dt>Genero/Tono</dt>
+                <dt>Género/Tono</dt>
                 <dd>{book.genreOrTone}</dd>
               </div>
             ) : null}
@@ -59,18 +61,16 @@ export function BookCard({ book, showMetadata = true }: BookCardProps) {
           <Link className="btn btnGhost" href={`/novelas/${book.slug}`}>
             Ver ficha
           </Link>
-          {isPublished && book.amazonUrl ? (
+          {purchaseUrl ? (
             <Link
               className="btn btnPrimary"
-              href={book.amazonUrl}
+              href={purchaseUrl}
               target="_blank"
               rel="noopener noreferrer"
             >
               Comprar en Amazon
             </Link>
-          ) : (
-            <span className={styles.soon}>Disponible proximamente</span>
-          )}
+          ) : !isPublished ? <span className={styles.soon}>Proyecto en preparación</span> : null}
         </div>
       </div>
     </article>

@@ -6,25 +6,25 @@ import styles from "./page.module.css";
 export const metadata: Metadata = buildMetadata({
   title: "Relatos",
   description:
-    "Selección de relatos y microrrelatos de Emy Barraca con enlace directo a su publicación original.",
+    "Selección de narrativa breve de Emy Barraca con acceso directo a sus publicaciones.",
   pathname: "/relatos",
 });
 
 export default function StoriesPage() {
-  const stories = getStories();
+  const stories = getStories().filter((story) => !story.reviewFields?.includes("title"));
   const groups = [
     {
-      id: "relatos",
-      title: "Relatos",
+      id: "textos-narrativos",
+      title: "Textos narrativos",
       description:
-        "Textos narrativos de mayor aliento, publicados en medios, antologías o certámenes literarios.",
+        "Piezas de mayor recorrido publicadas en medios, antologías o certámenes literarios.",
       items: stories.filter((story) => story.category === "relato"),
     },
     {
       id: "microrrelatos",
       title: "Microrrelatos",
       description:
-        "Piezas breves donde la intensidad y la síntesis concentran la voz de la autora.",
+        "Textos de condensación y pulso breve, donde cada línea trabaja con precisión y resonancia.",
       items: stories.filter((story) => story.category === "microrrelato"),
     },
   ];
@@ -32,18 +32,12 @@ export default function StoriesPage() {
   return (
     <div className="pageShell">
       <header className={styles.intro}>
-        <h1 className="pageTitle">Relatos</h1>
+        <p className={styles.pageEyebrow}>Narrativa breve</p>
+        <h1 className="pageTitle">Textos publicados</h1>
         <p className="pageLead">
-          Selección de relatos y microrrelatos con enlace directo a su publicación original.
+          Una selección de piezas breves de Emy Barraca con acceso directo a su publicación
+          original.
         </p>
-        <div className={styles.summaryStrip} aria-label="Resumen de publicaciones breves">
-          {groups.map((group) => (
-            <article key={group.id} className={styles.summaryCard}>
-              <p className={styles.summaryValue}>{group.items.length}</p>
-              <p className={styles.summaryLabel}>{group.title}</p>
-            </article>
-          ))}
-        </div>
       </header>
 
       {groups.map((group) => (
@@ -59,23 +53,28 @@ export default function StoriesPage() {
             {group.items.map((story) => {
               const categoryLabel =
                 story.category === "microrrelato" ? "Microrrelato" : "Relato";
+              const showYear =
+                !story.reviewFields?.includes("year") &&
+                story.yearLabel.toLowerCase() !== "pendiente de revisión";
+              const showExcerpt =
+                Boolean(story.excerpt) && !story.reviewFields?.includes("excerpt");
 
               return (
                 <article className={`card ${styles.card}`} key={story.id}>
                   <div className={styles.metaRow}>
                     <p className={styles.categoryBadge}>{categoryLabel}</p>
-                    <p className={styles.meta}>Año: {story.yearLabel}</p>
+                    {showYear ? <p className={styles.meta}>Año {story.yearLabel}</p> : null}
                   </div>
-                  <h3 className={styles.title}>{story.title}</h3>
-                  {story.excerpt ? <p className={styles.excerpt}>{story.excerpt}</p> : null}
+                  <h3 className={styles.storyTitle}>{story.title}</h3>
+                  {showExcerpt ? <p className={styles.excerpt}>{story.excerpt}</p> : null}
                   <a
                     className={`btn btnGhost ${styles.linkButton}`}
                     href={story.externalUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`Leer relato: ${story.title}`}
+                    aria-label={`Abrir publicación: ${story.title}`}
                   >
-                    Leer relato
+                    Abrir publicación
                   </a>
                 </article>
               );

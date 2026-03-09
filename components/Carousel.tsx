@@ -2,7 +2,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import Link from "next/link";
-import type { Book } from "@/data/site";
+import { getBookDescription, hasBookPurchaseLink, type Book } from "@/data/site";
 import { BookCover } from "./BookCover";
 import styles from "./Carousel.module.css";
 
@@ -107,6 +107,8 @@ export function Carousel({ books }: CarouselProps) {
         >
           {items.map((book, index) => {
             const isPublished = book.status === "published";
+            const description = getBookDescription(book);
+            const purchaseUrl = hasBookPurchaseLink(book.amazonUrl) ? book.amazonUrl : undefined;
             return (
               <li key={book.slug} className={styles.slide}>
                 <article className={styles.card}>
@@ -125,17 +127,17 @@ export function Carousel({ books }: CarouselProps) {
                       {isPublished ? "Novela publicada" : "Proyecto en proceso"}
                     </p>
                     <h3>{book.title}</h3>
-                    <p>{book.synopsis}</p>
+                    <p>{description}</p>
 
                     <div className={styles.actions}>
                       <Link className="btn btnGhost" href={`/novelas/${book.slug}`}>
                         Ver ficha
                       </Link>
 
-                      {isPublished && book.amazonUrl ? (
+                      {purchaseUrl ? (
                         <Link
                           className="btn btnPrimary"
-                          href={book.amazonUrl}
+                          href={purchaseUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                         >

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { siteConfig } from "@/data/site";
-import { AuthorPortrait } from "./AuthorPortrait";
 import styles from "./Hero.module.css";
 
 export function Hero() {
@@ -12,16 +11,6 @@ export function Hero() {
           {siteConfig.tagline}
         </h1>
         <p className={styles.lead}>{siteConfig.shortIntro}</p>
-        <p className={styles.supportingCopy}>
-          Emy Barraca, nombre literario de {siteConfig.legalName}, ha publicado dos novelas
-          con Ediciones Rubeo y desarrolla una trayectoria reconocida en relatos, cartas y
-          microrrelatos.
-        </p>
-        <ul className={styles.highlights} aria-label="Claves de la autora">
-          <li>Dos novelas publicadas</li>
-          <li>Ediciones Rubeo</li>
-          <li>Relatos y cartas premiados</li>
-        </ul>
         <div className={styles.actions}>
           <Link className="btn btnPrimary" href="/novelas">
             Ver novelas
@@ -29,20 +18,6 @@ export function Hero() {
           <Link className="btn btnGhost" href="/sobre-emy">
             Conocer a Emy
           </Link>
-        </div>
-      </div>
-
-      <div className={styles.mediaColumn}>
-        <AuthorPortrait
-          sizes="(max-width: 767px) 70vw, (max-width: 1100px) 34vw, 296px"
-          preload
-          frameClassName={styles.portrait}
-        />
-        <div className={styles.noteCard}>
-          <p className={styles.noteLabel}>Firma literaria</p>
-          <p className={styles.noteText}>
-            Emilia García Castro escribe bajo el nombre de Emy Barraca.
-          </p>
         </div>
       </div>
     </section>
