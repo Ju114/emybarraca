@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useState } from "react";
 import styles from "./ContactForm.module.css";
 
 type FormData = {
@@ -44,8 +44,7 @@ export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [resultMessage, setResultMessage] = useState<string | null>(null);
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
-
-  const hasErrors = useMemo(() => Object.keys(errors).length > 0, [errors]);
+  const hasErrors = Object.keys(errors).length > 0;
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -96,6 +95,7 @@ export function ContactForm() {
           <input
             id="name"
             autoComplete="name"
+            required
             value={formData.name}
             onChange={(event) =>
               setFormData((prev) => ({ ...prev, name: event.target.value }))
@@ -116,6 +116,7 @@ export function ContactForm() {
             id="email"
             type="email"
             autoComplete="email"
+            required
             value={formData.email}
             onChange={(event) =>
               setFormData((prev) => ({ ...prev, email: event.target.value }))
@@ -135,6 +136,7 @@ export function ContactForm() {
         <span>Asunto</span>
         <input
           id="subject"
+          required
           value={formData.subject}
           onChange={(event) =>
             setFormData((prev) => ({ ...prev, subject: event.target.value }))
@@ -154,6 +156,7 @@ export function ContactForm() {
         <textarea
           id="message"
           rows={6}
+          required
           value={formData.message}
           onChange={(event) =>
             setFormData((prev) => ({ ...prev, message: event.target.value }))
@@ -168,12 +171,16 @@ export function ContactForm() {
         ) : null}
       </label>
 
-      <button className="btn btnPrimary" disabled={isSubmitting} type="submit">
+      <button className={`btn btnPrimary ${styles.submitButton}`} disabled={isSubmitting} type="submit">
         {isSubmitting ? "Enviando..." : "Enviar mensaje"}
       </button>
 
       {resultMessage ? (
-        <p className={`${styles.result} ${hasErrors ? styles.resultError : ""}`}>
+        <p
+          className={`${styles.result} ${hasErrors ? styles.resultError : ""}`}
+          role={hasErrors ? "alert" : "status"}
+          aria-live="polite"
+        >
           {resultMessage}
         </p>
       ) : null}

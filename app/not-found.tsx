@@ -1,17 +1,18 @@
-import Link from "next/link";
+import { NoticePage } from "@/components/NoticePage";
 
 export default function NotFound() {
   return (
     <div className="pageShell">
-      <section className="card">
-        <h1 className="pageTitle">Pagina no encontrada</h1>
-        <p className="pageLead">
-          La URL solicitada no esta disponible o fue movida.
-        </p>
-        <Link className="btn btnPrimary" href="/">
-          Volver al inicio
-        </Link>
-      </section>
+      <NoticePage
+        eyebrow="Navegación"
+        title="Página no encontrada"
+        lead="La URL solicitada no está disponible o ha cambiado de ubicación."
+        body="Puedes volver al inicio para continuar navegando por las novelas, relatos y la información de autora disponible en la web."
+        actions={[
+          { href: "/", label: "Volver al inicio" },
+          { href: "/novelas", label: "Ir a novelas", variant: "ghost" },
+        ]}
+      />
     </div>
   );
 }

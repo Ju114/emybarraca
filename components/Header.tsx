@@ -81,6 +81,7 @@ export function Header() {
                   <Link
                     className={`${styles.navLink} ${isActive ? styles.active : ""}`}
                     href={link.href}
+                    aria-current={isActive ? "page" : undefined}
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.label}

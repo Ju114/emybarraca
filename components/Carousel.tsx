@@ -1,9 +1,9 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useState } from "react";
-import Image from "next/image";
+import { useCallback, useRef, useState } from "react";
 import Link from "next/link";
 import type { Book } from "@/data/site";
+import { BookCover } from "./BookCover";
 import styles from "./Carousel.module.css";
 
 type CarouselProps = {
@@ -11,7 +11,7 @@ type CarouselProps = {
 };
 
 export function Carousel({ books }: CarouselProps) {
-  const items = useMemo(() => books, [books]);
+  const items = books;
   const [currentIndex, setCurrentIndex] = useState(0);
   const touchStartX = useRef<number | null>(null);
   const touchDeltaX = useRef(0);
@@ -105,20 +105,18 @@ export function Carousel({ books }: CarouselProps) {
           className={styles.track}
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
-          {items.map((book) => {
+          {items.map((book, index) => {
             const isPublished = book.status === "published";
             return (
               <li key={book.slug} className={styles.slide}>
                 <article className={styles.card}>
                   <div className={styles.imageWrap}>
-                    <Image
-                      src={book.coverImage}
-                      alt={`Portada de ${book.title}`}
-                      width={410}
-                      height={560}
-                      sizes="(max-width: 800px) 80vw, 360px"
-                      className={styles.image}
-                      loading="lazy"
+                    <BookCover
+                      book={book}
+                      sizes="(max-width: 780px) 72vw, 320px"
+                      preload={index === 0}
+                      loading="eager"
+                      frameClassName={styles.imageFrame}
                     />
                   </div>
 

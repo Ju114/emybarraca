@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Book } from "@/data/site";
+import { BookCover } from "./BookCover";
 import styles from "./BookCard.module.css";
 
 type BookCardProps = {
@@ -18,14 +18,10 @@ export function BookCard({ book, showMetadata = true }: BookCardProps) {
         href={`/novelas/${book.slug}`}
         aria-label={`Ver ficha de ${book.title}`}
       >
-        <Image
-          className={styles.cover}
-          src={book.coverImage}
-          alt={`Portada de ${book.title}`}
-          width={430}
-          height={600}
-          sizes="(max-width: 600px) 70vw, (max-width: 1024px) 35vw, 300px"
-          loading="lazy"
+        <BookCover
+          book={book}
+          sizes="(max-width: 700px) 72vw, 296px"
+          frameClassName={styles.coverFrame}
         />
       </Link>
 

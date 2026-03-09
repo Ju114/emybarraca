@@ -34,18 +34,30 @@ export default function ContactPage() {
 
   return (
     <div className="pageShell">
-      <header className={styles.intro}>
-        <h1 className="pageTitle">Contacto</h1>
-        <p className="pageLead">Escríbeme para consultas, prensa o colaboraciones.</p>
-      </header>
+      <section className={styles.hero}>
+        <div className={styles.intro}>
+          <p className={styles.eyebrow}>Contacto profesional</p>
+          <h1 className="pageTitle">Contacto</h1>
+          <p className="pageLead">{siteConfig.contactIntro}</p>
+        </div>
+
+        <article className={styles.responseCard}>
+          <p className={styles.responseLabel}>Respuesta estimada</p>
+          <p className={styles.responseValue}>48-72 horas laborables</p>
+          <p className={styles.responseCopy}>
+            Para prensa, editoriales, colaboraciones o propuestas profesionales.
+          </p>
+        </article>
+      </section>
 
       <section className={styles.grid} aria-labelledby="canales-contacto">
-        <article>
+        <article className={styles.channelsColumn}>
           <h2 id="canales-contacto" className="sectionTitle">
             Canales directos
           </h2>
           <p className={styles.copy}>
-            También puedes usar estas vías directas para mensajes rápidos y propuestas.
+            También puedes utilizar estas vías directas para mensajes rápidos, consultas
+            editoriales y primeras conversaciones de trabajo.
           </p>
           <div className={styles.channelList}>
             {channels.map((channel) => (
@@ -73,13 +85,22 @@ export default function ContactPage() {
               </article>
             ))}
           </div>
+
+          <article className={styles.noteCard}>
+            <h3>Antes de escribir</h3>
+            <p>
+              Si tu mensaje está relacionado con entrevistas, editoriales, presentaciones o
+              colaboraciones culturales, puedes indicar desde el primer contacto el motivo de la
+              consulta para facilitar la respuesta.
+            </p>
+          </article>
         </article>
 
-        <article>
+        <article className={styles.formColumn}>
           <h2 className="sectionTitle">Formulario</h2>
           <p className={styles.copy}>
-            Respuesta estimada: 48-72 horas laborables. El envío se procesa en un endpoint
-            simulado y se puede conectar a un proveedor real.
+            Si prefieres escribir desde la web, puedes dejar tu mensaje aquí. El envío se procesa
+            en un endpoint simulado y se puede conectar a un proveedor real.
           </p>
           <ContactForm />
         </article>

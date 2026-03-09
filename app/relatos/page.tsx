@@ -1,76 +1,88 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { getStoriesByCategory } from "@/data/site";
+import { getStories } from "@/data/site";
 import { buildMetadata } from "@/lib/seo";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = buildMetadata({
   title: "Relatos",
   description:
-    "Relatos breves y microrrelatos de Emy Barraca, disponibles en texto completo o enlace externo.",
+    "Selección de relatos y microrrelatos de Emy Barraca con enlace directo a su publicación original.",
   pathname: "/relatos",
 });
 
-function StoryList({
-  title,
-  items,
-}: {
-  title: string;
-  items: ReturnType<typeof getStoriesByCategory>;
-}) {
-  return (
-    <section className={styles.block} aria-label={title}>
-      <h2 className="sectionTitle">{title}</h2>
-      <div className={styles.grid}>
-        {items.map((story) => {
-          const isTextMode = story.mode === "text";
-          const href = isTextMode ? `/relatos/${story.slug}` : story.externalUrl || "#";
-
-          return (
-            <article className="card" key={story.id}>
-              <p className={styles.modeBadge}>
-                {isTextMode ? "Texto completo" : "Enlace externo"}
-              </p>
-              <h3>{story.title}</h3>
-              <p className={styles.excerpt}>{story.excerpt || "EDITABLE: Extracto opcional"}</p>
-              <p className={styles.meta}>Ano: {story.year || "EDITABLE"}</p>
-              <p className={styles.meta}>
-                Migracion: {story.migration.source} · ID {story.migration.wixItemId || "EDITABLE"}
-              </p>
-
-              <Link
-                className="btn btnGhost"
-                href={href}
-                target={isTextMode ? undefined : "_blank"}
-                rel={isTextMode ? undefined : "noopener noreferrer"}
-              >
-                {isTextMode ? "Leer relato" : "Ir al enlace"}
-              </Link>
-            </article>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
 export default function StoriesPage() {
-  const shortStories = getStoriesByCategory("relato-breve");
-  const microStories = getStoriesByCategory("microrrelato");
+  const stories = getStories();
+  const groups = [
+    {
+      id: "relatos",
+      title: "Relatos",
+      description:
+        "Textos narrativos de mayor aliento, publicados en medios, antologías o certámenes literarios.",
+      items: stories.filter((story) => story.category === "relato"),
+    },
+    {
+      id: "microrrelatos",
+      title: "Microrrelatos",
+      description:
+        "Piezas breves donde la intensidad y la síntesis concentran la voz de la autora.",
+      items: stories.filter((story) => story.category === "microrrelato"),
+    },
+  ];
 
   return (
     <div className="pageShell">
-      <header>
+      <header className={styles.intro}>
         <h1 className="pageTitle">Relatos</h1>
         <p className="pageLead">
-          Esta seccion esta preparada para migracion desde Wix. Cada item permite elegir
-          entre publicacion interna (texto completo) o enlace externo segun el campo
-          <code> mode</code> de los datos.
+          Selección de relatos y microrrelatos con enlace directo a su publicación original.
         </p>
+        <div className={styles.summaryStrip} aria-label="Resumen de publicaciones breves">
+          {groups.map((group) => (
+            <article key={group.id} className={styles.summaryCard}>
+              <p className={styles.summaryValue}>{group.items.length}</p>
+              <p className={styles.summaryLabel}>{group.title}</p>
+            </article>
+          ))}
+        </div>
       </header>
 
-      <StoryList title={`Relatos breves (${shortStories.length})`} items={shortStories} />
-      <StoryList title={`Microrrelatos (${microStories.length})`} items={microStories} />
+      {groups.map((group) => (
+        <section key={group.id} className={styles.group} aria-labelledby={`${group.id}-heading`}>
+          <div className={styles.groupHeader}>
+            <h2 id={`${group.id}-heading`} className="sectionTitle">
+              {group.title}
+            </h2>
+            <p>{group.description}</p>
+          </div>
+
+          <div className={styles.grid}>
+            {group.items.map((story) => {
+              const categoryLabel =
+                story.category === "microrrelato" ? "Microrrelato" : "Relato";
+
+              return (
+                <article className={`card ${styles.card}`} key={story.id}>
+                  <div className={styles.metaRow}>
+                    <p className={styles.categoryBadge}>{categoryLabel}</p>
+                    <p className={styles.meta}>Año: {story.yearLabel}</p>
+                  </div>
+                  <h3 className={styles.title}>{story.title}</h3>
+                  {story.excerpt ? <p className={styles.excerpt}>{story.excerpt}</p> : null}
+                  <a
+                    className={`btn btnGhost ${styles.linkButton}`}
+                    href={story.externalUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Leer relato: ${story.title}`}
+                  >
+                    Leer relato
+                  </a>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      ))}
     </div>
   );
 }

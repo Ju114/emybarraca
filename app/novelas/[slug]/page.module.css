@@ -1,18 +1,22 @@
 .layout {
   display: grid;
-  gap: 1.3rem;
-  grid-template-columns: minmax(240px, 360px) 1fr;
+  gap: clamp(1.4rem, 3vw, 2.3rem);
+  grid-template-columns: minmax(260px, 390px) minmax(0, 1fr);
   align-items: start;
 }
 
-.cover {
-  border: 1px solid var(--color-border);
-  border-radius: 14px;
+.coverFrame {
+  justify-self: center;
+  width: min(100%, 24rem);
+  position: sticky;
+  top: calc(4.5rem + 1rem);
 }
 
 .content {
   display: grid;
+  min-width: 0;
   gap: 0.9rem;
+  align-content: start;
 }
 
 .kicker {
@@ -35,13 +39,17 @@
 .meta {
   margin-top: 0.2rem;
   display: grid;
-  gap: 0.35rem;
+  gap: 0.8rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .meta div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.85rem 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--color-border) 88%, white);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--color-bg) 78%, white);
 }
 
 .meta dt {
@@ -76,7 +84,12 @@
     grid-template-columns: 1fr;
   }
 
-  .cover {
-    max-width: 380px;
+  .coverFrame {
+    position: static;
+    width: min(82vw, 22rem);
+  }
+
+  .meta {
+    grid-template-columns: 1fr;
   }
 }

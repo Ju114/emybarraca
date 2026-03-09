@@ -1,0 +1,19 @@
+.frame {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--color-border) 88%, white);
+  border-radius: 22px;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-surface-alt) 92%, white),
+      color-mix(in srgb, var(--color-primary) 4%, white)
+    ),
+    var(--color-surface-alt);
+  box-shadow: var(--shadow-media);
+}
+
+.image {
+  width: 100%;
+  height: auto;
+}

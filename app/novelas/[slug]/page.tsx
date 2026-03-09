@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BookCover } from "@/components/BookCover";
 import { books, getBookBySlug } from "@/data/site";
 import { buildMetadata, getCanonical } from "@/lib/seo";
 import styles from "./page.module.css";
@@ -71,14 +71,11 @@ export default async function NovelDetailPage({ params }: NovelPageProps) {
   return (
     <div className="pageShell">
       <article className={styles.layout}>
-        <Image
-          src={book.coverImage}
-          alt={`Portada de ${book.title}`}
-          width={480}
-          height={680}
-          className={styles.cover}
-          sizes="(max-width: 900px) 80vw, 380px"
-          priority
+        <BookCover
+          book={book}
+          sizes="(max-width: 900px) 82vw, 384px"
+          preload
+          frameClassName={styles.coverFrame}
         />
 
         <div className={styles.content}>

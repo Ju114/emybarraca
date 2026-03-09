@@ -10,6 +10,14 @@ export function Footer() {
         <div className={styles.bioBlock}>
           <p className={styles.kicker}>{siteConfig.name}</p>
           <p className={styles.bio}>{siteConfig.shortBioFooter}</p>
+          <div className={styles.bioActions}>
+            <Link className={styles.emailLink} href={`mailto:${siteConfig.contactEmail}`}>
+              {siteConfig.contactEmail}
+            </Link>
+            <Link className={styles.contactLink} href="/contacto">
+              Contacto editorial
+            </Link>
+          </div>
         </div>
 
         <div>
@@ -25,7 +33,11 @@ export function Footer() {
 
         <div>
           <p className={styles.blockTitle}>Redes sociales</p>
-          <SocialLinks compact iconOnly platforms={["youtube", "facebook", "instagram", "tiktok"]} />
+          <SocialLinks
+            compact
+            iconOnly
+            platforms={["youtube", "facebook", "instagram", "tiktok"]}
+          />
         </div>
 
         <div>

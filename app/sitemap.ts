@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { books, SITE_URL, stories } from "@/data/site";
+import { books, SITE_URL } from "@/data/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
@@ -25,14 +25,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const storyRoutes = stories
-    .filter((story) => story.mode === "text")
-    .map((story) => ({
-      url: `${SITE_URL}/relatos/${story.slug}`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    }));
-
-  return [...staticRoutes, ...novelRoutes, ...storyRoutes];
+  return [...staticRoutes, ...novelRoutes];
 }

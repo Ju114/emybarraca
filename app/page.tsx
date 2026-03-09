@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Carousel } from "@/components/Carousel";
 import { Hero } from "@/components/Hero";
 import { getFeaturedBooks } from "@/data/site";
@@ -14,6 +15,29 @@ export const metadata: Metadata = buildMetadata({
 
 export default function HomePage() {
   const featuredBooks = getFeaturedBooks();
+  const pathways = [
+    {
+      title: "Sobre Emy",
+      description:
+        "Biografía, trayectoria literaria y reconocimientos organizados con una lectura clara y editorial.",
+      href: "/sobre-emy",
+      action: "Conocer a la autora",
+    },
+    {
+      title: "Relatos",
+      description:
+        "Selección de relatos y microrrelatos publicados con acceso directo a su fuente original.",
+      href: "/relatos",
+      action: "Leer relatos",
+    },
+    {
+      title: "Contacto",
+      description:
+        "Canales directos para consultas editoriales, entrevistas, propuestas y colaboraciones.",
+      href: "/contacto",
+      action: "Ir a contacto",
+    },
+  ];
 
   return (
     <div className="pageShell">
@@ -30,6 +54,30 @@ export default function HomePage() {
           </p>
         </div>
         <Carousel books={featuredBooks} />
+      </section>
+
+      <section className={styles.exploreSection} aria-labelledby="explorar-web">
+        <div className={styles.sectionHeader}>
+          <h2 id="explorar-web" className="sectionTitle">
+            Una web pensada para descubrir su universo literario
+          </h2>
+          <p>
+            Recorre la trayectoria de la autora, consulta sus novelas publicadas y accede a
+            relatos, microrrelatos y vías de contacto desde una misma experiencia editorial.
+          </p>
+        </div>
+
+        <div className={styles.pathwaysGrid}>
+          {pathways.map((item) => (
+            <article key={item.href} className={styles.pathwayCard}>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+              <Link className="btn btnGhost" href={item.href}>
+                {item.action}
+              </Link>
+            </article>
+          ))}
+        </div>
       </section>
     </div>
   );

@@ -1,28 +1,35 @@
 .card {
   display: grid;
   gap: 1rem;
+  height: 100%;
   border: 1px solid var(--color-border);
   border-radius: 18px;
   background: var(--color-surface);
   padding: 1rem;
+  grid-template-rows: auto 1fr;
 }
 
 .coverLink {
+  display: block;
   border-radius: 12px;
-  overflow: hidden;
 }
 
-.cover {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  border: 1px solid var(--color-border);
-  object-fit: cover;
+.coverLink:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 65%, white);
+  outline-offset: 4px;
+}
+
+.coverFrame {
+  width: min(100%, 18.5rem);
+  margin-inline: auto;
 }
 
 .body {
   display: grid;
+  min-width: 0;
+  height: 100%;
   gap: 0.7rem;
+  grid-template-rows: auto auto auto 1fr auto;
 }
 
 .badge {
@@ -46,8 +53,13 @@
   text-decoration: none;
 }
 
+.title a:hover {
+  text-decoration: underline;
+}
+
 .synopsis {
   margin: 0;
+  overflow-wrap: anywhere;
   line-height: 1.75;
 }
 
@@ -76,7 +88,7 @@
 }
 
 .actions {
-  margin-top: 0.4rem;
+  margin-top: auto;
   display: flex;
   flex-wrap: wrap;
   gap: 0.55rem;
@@ -87,4 +99,14 @@
   color: var(--color-text-muted);
   font-family: var(--font-ui);
   font-size: 0.9rem;
+}
+
+@media (max-width: 700px) {
+  .coverFrame {
+    width: min(72vw, 18rem);
+  }
+
+  .actions :global(.btn) {
+    flex: 1 1 100%;
+  }
 }
