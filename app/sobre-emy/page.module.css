@@ -112,8 +112,7 @@
   line-height: 1.75;
 }
 
-.authorGrid,
-.recognitionIntro {
+.authorGrid {
   display: grid;
   gap: 1rem;
   grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.95fr);
@@ -121,7 +120,6 @@
 }
 
 .narrativeCard,
-.recognitionLeadCard,
 .snapshotCard,
 .momentCard {
   display: grid;
@@ -129,7 +127,6 @@
 }
 
 .narrativeCard p,
-.recognitionLeadCard p,
 .closingText,
 .momentText {
   line-height: 1.8;
@@ -177,68 +174,6 @@
   margin: 0;
   color: var(--color-text);
   line-height: 1.6;
-}
-
-.totalRecognitionCard {
-  display: grid;
-  gap: 0.65rem;
-  align-content: start;
-}
-
-.totalRecognitionLabel {
-  color: var(--color-text-muted);
-  font-family: var(--font-ui);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.totalRecognitionValue {
-  margin: 0;
-  color: var(--color-primary);
-  font-family: var(--font-heading);
-  font-size: clamp(2.8rem, 6vw, 4rem);
-  line-height: 0.95;
-}
-
-.totalRecognitionText {
-  color: var(--color-text-muted);
-  line-height: 1.72;
-}
-
-.recognitionStats {
-  display: grid;
-  gap: 0.75rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin: 0;
-}
-
-.recognitionStats div {
-  display: grid;
-  gap: 0.3rem;
-  border: 1px solid color-mix(in srgb, var(--color-border) 86%, white);
-  border-radius: 16px;
-  background: color-mix(in srgb, var(--color-bg) 74%, white);
-  padding: 0.85rem 0.95rem;
-}
-
-.recognitionStats dt {
-  color: var(--color-text-muted);
-  font-family: var(--font-ui);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  line-height: 1.45;
-  text-transform: uppercase;
-}
-
-.recognitionStats dd {
-  margin: 0;
-  color: var(--color-primary);
-  font-family: var(--font-heading);
-  font-size: 2rem;
-  line-height: 0.95;
 }
 
 .accordionList {
@@ -388,8 +323,7 @@
 
 @media (max-width: 1100px) {
   .hero,
-  .authorGrid,
-  .recognitionIntro {
+  .authorGrid {
     grid-template-columns: 1fr;
   }
 
@@ -445,10 +379,6 @@
   }
 
   .recognitionList {
-    grid-template-columns: 1fr;
-  }
-
-  .recognitionStats {
     grid-template-columns: 1fr;
   }
 

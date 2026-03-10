@@ -284,17 +284,6 @@ const recognitionGroups: RecognitionGroup[] = [
   },
 ];
 
-const recognitionCount = recognitionGroups.reduce(
-  (total, group) => total + group.items.length,
-  0,
-);
-
-const recognitionSummary = recognitionGroups.map((group) => ({
-  id: group.id,
-  title: group.title,
-  count: group.items.length,
-}));
-
 export const metadata: Metadata = buildMetadata({
   title: "Sobre Emy",
   description:
@@ -405,36 +394,6 @@ export default function AboutPage() {
             La continuidad en certámenes de narrativa breve acompaña y refuerza su faceta como
             novelista, con un historial de premios que se extiende a lo largo de varios años.
           </p>
-        </div>
-
-        <div className={styles.recognitionIntro}>
-          <article className={`card ${styles.recognitionLeadCard}`}>
-            <p>
-              Entre 2016 y 2023, Emilia García Castro ha reunido {recognitionCount} premios,
-              menciones y accésits en relato, carta literaria, microrrelato y cuento infantil.
-            </p>
-            <dl className={styles.recognitionStats} aria-label="Resumen de premios y reconocimientos">
-              {recognitionSummary.map((group) => (
-                <div key={group.id}>
-                  <dt>{group.title}</dt>
-                  <dd>{group.count}</dd>
-                </div>
-              ))}
-            </dl>
-            <p>
-              El conjunto habla de continuidad, diversidad de formatos y una voz literaria que
-              ha mantenido presencia constante en certámenes muy distintos.
-            </p>
-          </article>
-
-          <article className={`card ${styles.totalRecognitionCard}`}>
-            <p className={styles.totalRecognitionLabel}>Total de reconocimientos</p>
-            <p className={styles.totalRecognitionValue}>{recognitionCount}</p>
-            <p className={styles.totalRecognitionText}>
-              8 primeros premios, 9 segundos premios, 2 terceros premios y 8 menciones y
-              accésits integrados en una sola lectura de trayectoria.
-            </p>
-          </article>
         </div>
 
         <div className={styles.accordionList}>
