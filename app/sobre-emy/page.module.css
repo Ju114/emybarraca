@@ -115,32 +115,6 @@
   text-align: center;
 }
 
-.focusGrid {
-  display: grid;
-  gap: 0.9rem;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.focusCard {
-  border: 1px solid var(--color-border);
-  border-radius: 18px;
-  background: var(--color-surface);
-  padding: 1rem;
-  box-shadow: var(--shadow-media-soft);
-}
-
-.focusTitle {
-  margin: 0;
-  color: var(--color-primary);
-  font-size: 1.12rem;
-}
-
-.focusText {
-  margin-top: 0.45rem;
-  color: var(--color-text-muted);
-  line-height: 1.7;
-}
-
 .section {
   display: grid;
   gap: 1.15rem;
@@ -227,54 +201,32 @@
   line-height: 1.6;
 }
 
-.momentsGrid {
+.totalRecognitionCard {
   display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+  align-content: start;
 }
 
-.momentTitle {
-  margin: 0;
-  color: var(--color-primary);
-  font-size: 1.45rem;
+.totalRecognitionLabel {
+  color: var(--color-text-muted);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.momentCard :global(.btn) {
-  justify-self: start;
-  margin-top: auto;
-}
-
-.recognitionSummaryGrid {
-  display: grid;
-  gap: 0.85rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.recognitionSummaryCard {
-  border: 1px solid var(--color-border);
-  border-radius: 18px;
-  background: var(--color-surface);
-  padding: 1rem;
-}
-
-.recognitionSummaryValue {
+.totalRecognitionValue {
   margin: 0;
   color: var(--color-primary);
   font-family: var(--font-heading);
-  font-size: 2rem;
-  line-height: 1;
+  font-size: clamp(2.8rem, 6vw, 4rem);
+  line-height: 0.95;
 }
 
-.recognitionSummaryTitle {
-  margin: 0.5rem 0 0;
-  color: var(--color-primary);
-  font-size: 1.12rem;
-}
-
-.recognitionSummaryText {
-  margin-top: 0.4rem;
+.totalRecognitionText {
   color: var(--color-text-muted);
-  line-height: 1.65;
+  line-height: 1.72;
 }
 
 .accordionList {
@@ -295,9 +247,8 @@
 
 .accordionSummary {
   display: grid;
-  gap: 0.45rem 1rem;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
+  gap: 0.45rem;
+  grid-template-columns: minmax(0, 1fr);
   padding: 1.1rem 1.15rem;
   cursor: pointer;
   list-style: none;
@@ -316,18 +267,6 @@
 .accordionText {
   color: var(--color-text-muted);
   line-height: 1.65;
-}
-
-.accordionCount {
-  display: inline-grid;
-  place-items: center;
-  min-width: 3rem;
-  height: 3rem;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--color-primary) 12%, white);
-  color: var(--color-primary);
-  font-family: var(--font-heading);
-  font-size: 1.3rem;
 }
 
 .accordionBody {
@@ -418,8 +357,7 @@
 @media (max-width: 1100px) {
   .hero,
   .authorGrid,
-  .recognitionIntro,
-  .momentsGrid {
+  .recognitionIntro {
     grid-template-columns: 1fr;
   }
 
@@ -429,11 +367,6 @@
 
   .caption {
     text-align: left;
-  }
-
-  .focusGrid,
-  .recognitionSummaryGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -462,8 +395,7 @@
   .sectionLead,
   .narrativeCard p,
   .recognitionLeadCard p,
-  .focusText,
-  .momentText,
+  .totalRecognitionText,
   .closingText {
     font-size: 0.98rem;
   }
@@ -472,18 +404,16 @@
     width: min(78vw, 18rem);
   }
 
-  .focusGrid,
-  .recognitionSummaryGrid,
+  .heroFigure {
+    justify-items: center;
+  }
+
+  .caption {
+    text-align: center;
+  }
+
   .recognitionList {
     grid-template-columns: 1fr;
-  }
-
-  .accordionSummary {
-    grid-template-columns: 1fr;
-  }
-
-  .accordionCount {
-    justify-self: start;
   }
 
   .heroActions :global(.btn),

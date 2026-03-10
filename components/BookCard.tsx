@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getBookDescription, hasBookPurchaseLink, type Book } from "@/data/site";
+import { getBookDescription, getBookPurchaseUrl, type Book } from "@/data/site";
 import { BookCover } from "./BookCover";
 import styles from "./BookCard.module.css";
 
@@ -11,7 +11,7 @@ type BookCardProps = {
 export function BookCard({ book, showMetadata = true }: BookCardProps) {
   const isPublished = book.status === "published";
   const description = getBookDescription(book);
-  const purchaseUrl = hasBookPurchaseLink(book.amazonUrl) ? book.amazonUrl : undefined;
+  const purchaseUrl = getBookPurchaseUrl(book);
 
   return (
     <article className={styles.card}>

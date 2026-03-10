@@ -5,19 +5,6 @@ import { siteConfig } from "@/data/site";
 import { buildMetadata, getCanonical } from "@/lib/seo";
 import styles from "./page.module.css";
 
-type FocusCard = {
-  title: string;
-  text: string;
-};
-
-type TrajectoryCard = {
-  eyebrow: string;
-  title: string;
-  text: string;
-  href: string;
-  action: string;
-};
-
 type RecognitionItem = {
   distinction: string;
   award: string;
@@ -44,54 +31,12 @@ const authorBio = [
   "Esa combinación de obra publicada y trayectoria premiada dibuja un perfil literario sólido y reconocible: una autora contemporánea que escribe con sensibilidad, constancia y una clara fidelidad a su universo narrativo.",
 ];
 
-const focusCards: FocusCard[] = [
-  {
-    title: "Obra publicada",
-    text: "Dos novelas publicadas entre 2023 y 2025, vinculadas a hitos relevantes de su trayectoria reciente.",
-  },
-  {
-    title: "Narrativa breve",
-    text: "Una presencia constante en certámenes de relatos, cartas literarias y microrrelatos.",
-  },
-  {
-    title: "Trayectoria sostenida",
-    text: "Un recorrido reconocible, construido con continuidad, oficio y vocación literaria.",
-  },
-];
-
-const trajectoryCards: TrajectoryCard[] = [
-  {
-    eyebrow: "2023 · Novela publicada",
-    title: "Cultivar dos jardines",
-    text:
-      'Ganadora del I Certamen Internacional de Novela Corta Romántica "Sanditon. Homenaje a Jane Austen" y publicada por Ediciones Rubeo en octubre de 2023.',
-    href: "/novelas/cultivar-dos-jardines",
-    action: "Ver novela",
-  },
-  {
-    eyebrow: "2025 · Novela publicada",
-    title: "Un océano de ida y vuelta",
-    text:
-      "Finalista del IV Premio Internacional de Novela Ciudad Ibera de Tugia y publicada por Ediciones Rubeo en mayo de 2025.",
-    href: "/novelas/un-oceano-de-ida-y-vuelta",
-    action: "Ver novela",
-  },
-  {
-    eyebrow: "Relato, carta y microrrelato",
-    title: "Una trayectoria premiada en texto breve",
-    text:
-      "Primeros, segundos y terceros premios, además de menciones y accésits, consolidan una trayectoria continuada en certámenes literarios.",
-    href: "#reconocimientos",
-    action: "Ver reconocimientos",
-  },
-];
-
 const recognitionGroups: RecognitionGroup[] = [
   {
     id: "primeros-premios",
     title: "Primeros premios",
     summary:
-      "Ocho primeros puestos entre cartas de amor y relatos breves, con especial constancia entre 2016 y 2022.",
+      "Cartas de amor y relatos breves premiados con continuidad entre 2016 y 2022.",
     items: [
       {
         distinction: "Premio nacional",
@@ -163,7 +108,7 @@ const recognitionGroups: RecognitionGroup[] = [
     id: "segundos-premios",
     title: "Segundos premios",
     summary:
-      "Nueve reconocimientos en cuento infantil, relato y carta literaria, prueba de una presencia continuada en certámenes de naturaleza diversa.",
+      "Reconocimientos en cuento infantil, relato y carta literaria a lo largo de certámenes de naturaleza diversa.",
     items: [
       {
         distinction: "Segundo premio",
@@ -243,7 +188,7 @@ const recognitionGroups: RecognitionGroup[] = [
     id: "terceros-premios",
     title: "Terceros premios",
     summary:
-      "Dos terceros premios que amplían su presencia a la reseña literaria y a la publicación en antología.",
+      "Premios que amplían su recorrido a la reseña literaria y a la publicación en antología.",
     items: [
       {
         distinction: "Tercer premio",
@@ -268,7 +213,7 @@ const recognitionGroups: RecognitionGroup[] = [
     id: "menciones",
     title: "Menciones y accésits",
     summary:
-      "Ocho distinciones complementarias que refuerzan la solidez de su recorrido en relato, microrrelato y publicaciones colectivas.",
+      "Distinciones complementarias en relato, microrrelato y publicaciones colectivas.",
     items: [
       {
         distinction: "Mención",
@@ -391,15 +336,6 @@ export default function AboutPage() {
             <li>Carta literaria</li>
             <li>Microrrelato</li>
           </ul>
-
-          <div className={styles.heroActions}>
-            <Link className="btn btnPrimary" href="#trayectoria">
-              Ver trayectoria
-            </Link>
-            <Link className="btn btnGhost" href="#reconocimientos">
-              Reconocimientos
-            </Link>
-          </div>
         </div>
 
         <figure className={styles.heroFigure}>
@@ -415,15 +351,6 @@ export default function AboutPage() {
         </figure>
       </section>
 
-      <section className={styles.focusGrid} aria-label="Claves de la autora">
-        {focusCards.map((card) => (
-          <article key={card.title} className={styles.focusCard}>
-            <h2 className={styles.focusTitle}>{card.title}</h2>
-            <p className={styles.focusText}>{card.text}</p>
-          </article>
-        ))}
-      </section>
-
       <section className={styles.section} aria-labelledby="autora-heading">
         <div className={styles.sectionHeader}>
           <p className={styles.sectionEyebrow}>Emy Barraca, autora</p>
@@ -431,9 +358,8 @@ export default function AboutPage() {
             Una presentación más biográfica y cercana
           </h2>
           <p className={styles.sectionLead}>
-            Esta página reúne el contexto de autora, los hitos principales de su recorrido y
-            una panorámica clara de su trayectoria literaria, sin duplicar el contenido propio
-            de las fichas de novelas o de la página de narrativa breve.
+            Esta página reúne el contexto de autora y una panorámica clara de su recorrido
+            literario, con una lectura más limpia y centrada en lo esencial.
           </p>
         </div>
 
@@ -483,67 +409,35 @@ export default function AboutPage() {
         <div className={styles.sectionHeader}>
           <p className={styles.sectionEyebrow}>Trayectoria literaria</p>
           <h2 id="trayectoria-heading" className="sectionTitle">
-            Hitos que ordenan su recorrido
+            Premios y reconocimientos que ordenan su recorrido
           </h2>
           <p className={styles.sectionLead}>
-            La novela publicada y el reconocimiento sostenido en certámenes de narrativa breve
-            se entrelazan en una trayectoria construida con continuidad.
-          </p>
-        </div>
-
-        <div className={styles.momentsGrid}>
-          {trajectoryCards.map((card) => (
-            <article key={card.title} className={`card ${styles.momentCard}`}>
-              <p className={styles.momentEyebrow}>{card.eyebrow}</p>
-              <h3 className={styles.momentTitle}>{card.title}</h3>
-              <p className={styles.momentText}>{card.text}</p>
-              <Link className="btn btnGhost" href={card.href}>
-                {card.action}
-              </Link>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section
-        id="reconocimientos"
-        className={styles.section}
-        aria-labelledby="reconocimientos-heading"
-      >
-        <div className={styles.sectionHeader}>
-          <p className={styles.sectionEyebrow}>Reconocimientos literarios</p>
-          <h2 id="reconocimientos-heading" className="sectionTitle">
-            Un recorrido premiado con continuidad y amplitud
-          </h2>
-          <p className={styles.sectionLead}>
-            Los premios, menciones y accésits no aparecen aquí como un bloque curricular frío,
-            sino como la prueba de una dedicación sostenida a la escritura en distintos registros
-            del texto breve.
+            La continuidad en certámenes de narrativa breve acompaña y refuerza su faceta como
+            novelista, con un historial de premios que se extiende a lo largo de varios años.
           </p>
         </div>
 
         <div className={styles.recognitionIntro}>
           <article className={`card ${styles.recognitionLeadCard}`}>
-            <h3 className={styles.cardTitle}>Panorámica de la trayectoria</h3>
+            <h3 className={styles.cardTitle}>Una trayectoria premiada y sostenida</h3>
             <p>
-              Entre 2016 y 2023, Emilia García Castro ha reunido {recognitionCount} distinciones
-              entre primeros, segundos y terceros premios, además de menciones y accésits.
+              Entre 2016 y 2023, Emilia García Castro ha reunido {recognitionCount} premios,
+              menciones y accésits en relato, carta literaria, microrrelato y cuento infantil.
             </p>
             <p>
-              El conjunto habla de continuidad, diversidad de formatos y una presencia literaria
-              que acompaña y refuerza su faceta de novelista.
+              El conjunto habla de continuidad, diversidad de formatos y una voz literaria que
+              ha mantenido presencia constante en certámenes muy distintos.
             </p>
           </article>
 
-          <div className={styles.recognitionSummaryGrid}>
-            {recognitionGroups.map((group) => (
-              <article key={group.id} className={styles.recognitionSummaryCard}>
-                <p className={styles.recognitionSummaryValue}>{group.items.length}</p>
-                <h3 className={styles.recognitionSummaryTitle}>{group.title}</h3>
-                <p className={styles.recognitionSummaryText}>{group.summary}</p>
-              </article>
-            ))}
-          </div>
+          <article className={`card ${styles.totalRecognitionCard}`}>
+            <p className={styles.totalRecognitionLabel}>Total de reconocimientos</p>
+            <p className={styles.totalRecognitionValue}>{recognitionCount}</p>
+            <p className={styles.totalRecognitionText}>
+              Primeros, segundos y terceros premios, además de menciones y accésits, integrados
+              en una sola lectura de trayectoria.
+            </p>
+          </article>
         </div>
 
         <div className={styles.accordionList}>
@@ -555,7 +449,6 @@ export default function AboutPage() {
                   <h3 className={styles.accordionTitle}>{group.title}</h3>
                   <p className={styles.accordionText}>{group.summary}</p>
                 </div>
-                <span className={styles.accordionCount}>{group.items.length}</span>
               </summary>
 
               <div className={styles.accordionBody}>

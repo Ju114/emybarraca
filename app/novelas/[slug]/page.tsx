@@ -6,7 +6,7 @@ import {
   books,
   getBookBySlug,
   getBookDescription,
-  hasBookPurchaseLink,
+  getBookPurchaseUrl,
   isPlaceholderValue,
 } from "@/data/site";
 import { buildMetadata, getCanonical } from "@/lib/seo";
@@ -50,7 +50,8 @@ export default async function NovelDetailPage({ params }: NovelPageProps) {
 
   const isPublished = book.status === "published";
   const description = getBookDescription(book);
-  const purchaseUrl = hasBookPurchaseLink(book.amazonUrl) ? book.amazonUrl : undefined;
+  const directPurchaseUrl = isPlaceholderValue(book.amazonUrl) ? undefined : book.amazonUrl;
+  const purchaseUrl = getBookPurchaseUrl(book);
   const metadataItems = [
     { label: "Tipo", value: book.type },
     { label: "Género/Tono", value: book.genreOrTone },
@@ -76,10 +77,10 @@ export default async function NovelDetailPage({ params }: NovelPageProps) {
     genre: book.genreOrTone ?? book.theme ?? "Narrativa",
     publisher: isPlaceholderValue(book.metadata.editorial) ? undefined : book.metadata.editorial,
     isbn: isPlaceholderValue(book.metadata.isbn) ? undefined : book.metadata.isbn,
-    offers: isPublished && purchaseUrl
+    offers: isPublished && directPurchaseUrl
       ? {
           "@type": "Offer",
-          url: purchaseUrl,
+          url: directPurchaseUrl,
           availability: "https://schema.org/InStock",
         }
       : undefined,

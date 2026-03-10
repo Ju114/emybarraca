@@ -65,8 +65,8 @@ export const siteConfig = {
   tiktokUrl: "https://tiktok.com/@emybarraca", // EDITABLE (placeholder)
   whatsappUrl: "",
   social: {
-    youtube: "https://www.youtube.com/@emybarraca", // EDITABLE
-    facebook: "https://www.facebook.com/emybarraca", // EDITABLE
+    youtube: "",
+    facebook: "https://www.facebook.com/emy.barraca",
   },
   primaryCta: {
     label: "Contactar",
@@ -333,12 +333,12 @@ export const quickLinks = [
   { label: "Contacto", href: "/contacto" },
 ];
 
-export const socialLinks: SocialLinkItem[] = [
+export const socialLinks = [
   { platform: "youtube", label: "YouTube", href: siteConfig.social.youtube },
   { platform: "facebook", label: "Facebook", href: siteConfig.social.facebook },
   { platform: "instagram", label: "Instagram", href: siteConfig.instagramUrl },
   { platform: "tiktok", label: "TikTok", href: siteConfig.tiktokUrl },
-];
+].filter((link): link is SocialLinkItem => Boolean(link.href));
 
 export const legalLinks = [
   { label: "Aviso Legal", href: "/aviso-legal" },
@@ -356,6 +356,27 @@ export function isPlaceholderValue(value?: string | null) {
 
 export function hasBookPurchaseLink(url?: string) {
   return Boolean(url && !isPlaceholderValue(url));
+}
+
+function buildAmazonSearchUrl(book: Book) {
+  const params = new URLSearchParams({
+    i: "stripbooks",
+    k: `${book.title} Emilia Garcia Castro`,
+  });
+
+  return `https://www.amazon.es/s?${params.toString()}`;
+}
+
+export function getBookPurchaseUrl(book: Book) {
+  if (hasBookPurchaseLink(book.amazonUrl)) {
+    return book.amazonUrl;
+  }
+
+  if (book.status !== "published") {
+    return undefined;
+  }
+
+  return buildAmazonSearchUrl(book);
 }
 
 export function getBookDescription(book: Book) {
