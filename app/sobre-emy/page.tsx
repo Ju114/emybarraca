@@ -289,6 +289,12 @@ const recognitionCount = recognitionGroups.reduce(
   0,
 );
 
+const recognitionSummary = recognitionGroups.map((group) => ({
+  id: group.id,
+  title: group.title,
+  count: group.items.length,
+}));
+
 export const metadata: Metadata = buildMetadata({
   title: "Sobre Emy",
   description:
@@ -329,13 +335,6 @@ export default function AboutPage() {
             Emilia García Castro escribe bajo el nombre de Emy Barraca
           </p>
           <p className={styles.heroLead}>{authorLead}</p>
-
-          <ul className={styles.tagList} aria-label="Ámbitos literarios">
-            <li>Novela</li>
-            <li>Narrativa breve</li>
-            <li>Carta literaria</li>
-            <li>Microrrelato</li>
-          </ul>
         </div>
 
         <figure className={styles.heroFigure}>
@@ -392,15 +391,6 @@ export default function AboutPage() {
                 </div>
               </dl>
             </article>
-
-            <article className={`card ${styles.noteCard}`}>
-              <h3 className={styles.cardTitle}>Una presencia de autora</h3>
-              <p>
-                La combinación de publicaciones recientes y una trayectoria premiada en texto
-                breve sitúa a Emy Barraca como una autora con recorrido, credibilidad y una voz
-                narrativa ya reconocible dentro de su propio universo literario.
-              </p>
-            </article>
           </aside>
         </div>
       </section>
@@ -419,11 +409,18 @@ export default function AboutPage() {
 
         <div className={styles.recognitionIntro}>
           <article className={`card ${styles.recognitionLeadCard}`}>
-            <h3 className={styles.cardTitle}>Una trayectoria premiada y sostenida</h3>
             <p>
               Entre 2016 y 2023, Emilia García Castro ha reunido {recognitionCount} premios,
               menciones y accésits en relato, carta literaria, microrrelato y cuento infantil.
             </p>
+            <dl className={styles.recognitionStats} aria-label="Resumen de premios y reconocimientos">
+              {recognitionSummary.map((group) => (
+                <div key={group.id}>
+                  <dt>{group.title}</dt>
+                  <dd>{group.count}</dd>
+                </div>
+              ))}
+            </dl>
             <p>
               El conjunto habla de continuidad, diversidad de formatos y una voz literaria que
               ha mantenido presencia constante en certámenes muy distintos.
@@ -434,8 +431,8 @@ export default function AboutPage() {
             <p className={styles.totalRecognitionLabel}>Total de reconocimientos</p>
             <p className={styles.totalRecognitionValue}>{recognitionCount}</p>
             <p className={styles.totalRecognitionText}>
-              Primeros, segundos y terceros premios, además de menciones y accésits, integrados
-              en una sola lectura de trayectoria.
+              8 primeros premios, 9 segundos premios, 2 terceros premios y 8 menciones y
+              accésits integrados en una sola lectura de trayectoria.
             </p>
           </article>
         </div>
@@ -444,8 +441,14 @@ export default function AboutPage() {
           {recognitionGroups.map((group, index) => (
             <details key={group.id} className={styles.accordion} open={index === 0}>
               <summary className={styles.accordionSummary}>
-                <div>
+                <div className={styles.accordionHeader}>
                   <p className={styles.accordionEyebrow}>Detalle de trayectoria</p>
+                  <p className={styles.accordionCount}>
+                    {group.items.length}{" "}
+                    {group.items.length === 1 ? "reconocimiento" : "reconocimientos"}
+                  </p>
+                </div>
+                <div>
                   <h3 className={styles.accordionTitle}>{group.title}</h3>
                   <p className={styles.accordionText}>{group.summary}</p>
                 </div>

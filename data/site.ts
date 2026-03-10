@@ -63,9 +63,9 @@ export const siteConfig = {
   // EDITABLE: URLs centrales para canales de contacto.
   instagramUrl: "https://instagram.com/emybarraca", // EDITABLE (placeholder)
   tiktokUrl: "https://tiktok.com/@emybarraca", // EDITABLE (placeholder)
-  whatsappUrl: "",
+  whatsappUrl: "https://wa.me/34000000000", // EDITABLE (placeholder)
   social: {
-    youtube: "",
+    youtube: "https://www.youtube.com/@emybarraca", // EDITABLE (placeholder)
     facebook: "https://www.facebook.com/emy.barraca",
   },
   primaryCta: {
